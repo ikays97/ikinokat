@@ -9,17 +9,18 @@ const double kNavigationBarHeight = 44.0;
 
 // AppBar
 class MyAppBar extends AppBar implements PreferredSizeWidget {
-  MyAppBar(
-      {Key key,
-      Widget title,
-      AppBarBackType leadingType,
-      WillPopCallback onWillPop,
-      Widget leading,
-      Brightness brightness,
-      Color backgroundColor,
-      bool centerTitle = false,
-      double elevation})
-      : super(
+  MyAppBar({
+    Key key,
+    Widget title,
+    AppBarBackType leadingType,
+    WillPopCallback onWillPop,
+    Widget leading,
+    Brightness brightness,
+    Color backgroundColor,
+    bool centerTitle = false,
+    double elevation,
+    PreferredSizeWidget bottom,
+  }) : super(
           key: key,
           title: title ??
               Container(
@@ -50,9 +51,11 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
             ),
           ],
           elevation: elevation ?? 0.5,
+          bottomOpacity: 0.9,
+          bottom: bottom,
         );
   @override
-  get preferredSize => Size.fromHeight(44);
+  get preferredSize => Size.fromHeight(bottom == null ? 44 : 92);
 }
 
 class AppBarBack extends StatelessWidget {

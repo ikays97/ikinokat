@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const SERVER_API_URL = 'http://ikinokat.com/api';
+const SERVER_API_URL = "http://lomaysowda.com.tm/api/";
 
 class RequestUtil {
   static RequestUtil _instance = RequestUtil._internal();

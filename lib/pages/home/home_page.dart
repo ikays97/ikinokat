@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ikinokat/config/custom_color.dart';
 import 'package:ikinokat/pages/home/provider/home_provider.dart';
+import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
+import 'components/grid_products.dart';
 import 'components/swiper.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,7 +13,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => HomeProvider(),
-      child: HomePageContainer(),
+      child: Scaffold(
+        appBar: MyAppBar(
+          leadingType: AppBarBackType.None,
+        ),
+        body: HomePageContainer(),
+      ),
     );
   }
 }
@@ -28,7 +34,6 @@ class _HomePageContainerState extends State<HomePageContainer>
   Widget build(BuildContext context) {
     super.build(context);
     final state = Provider.of<HomeProvider>(context, listen: false);
-
     return state.loading
         ? MyLoadingWidget()
         : Container(
@@ -37,7 +42,6 @@ class _HomePageContainerState extends State<HomePageContainer>
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
               child: SmartRefresher(
                 controller: state.refreshController,
-                enablePullUp: true,
                 onRefresh: () => state.initData(refresh: true),
                 child: CustomScrollView(
                   slivers: <Widget>[
@@ -48,16 +52,19 @@ class _HomePageContainerState extends State<HomePageContainer>
                       ),
                     ),
 
-                    /// vip products
-                    // SliverToBoxAdapter(
-                    //   child: CommodityCateGory(
-                    //       cateGoryList: state.cateGoryList),
-                    // ),
+                    // vip products
+                    SliverToBoxAdapter(
+                      child: GridProducts(
+                        products: state.vipProducts,
+                      ),
+                    ),
 
-                    // /// trand products
-                    // SliverToBoxAdapter(
-                    //   child: BrandSwiper(brandList: state.brandList),
-                    // ),
+                    // vip products
+                    SliverToBoxAdapter(
+                      child: GridProducts(
+                        products: state.vipProducts,
+                      ),
+                    ),
 
                     /// all products by scrolling up
                   ],
@@ -70,6 +77,5 @@ class _HomePageContainerState extends State<HomePageContainer>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

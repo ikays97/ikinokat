@@ -1,11 +1,15 @@
 class CategoryModel {
-  String slug;
-  String name;
+  int id;
+  String name_tm;
+  String name_ru;
+  String name_en;
   String icon;
-  CategoryModel({this.name, this.icon});
+  CategoryModel({this.id, this.name_tm, this.name_ru, this.name_en, this.icon});
   CategoryModel.fromJson(Map<String, dynamic> json)
-      : slug = json['slug'],
-        name = json['name'],
+      : id = json['id'],
+        name_tm = json['name_tm'],
+        name_ru = json['name_ru'],
+        name_en = json['name_en'],
         icon = json['icon'];
 }
 

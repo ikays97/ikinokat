@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 import 'package:ikinokat/config/custom_color.dart';
+import 'package:ikinokat/pages/category/category_page.dart';
 import 'package:ikinokat/pages/home/home_page.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
+import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/utils/navigator.dart';
-import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_bottom_navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -40,9 +41,6 @@ class _MainPageState extends State<MainPage>
       allowFontScaling: true,
     );
     return Scaffold(
-      appBar: MyAppBar(
-        leadingType: AppBarBackType.None,
-      ),
       backgroundColor: CustomColors.backgroundColor,
       bottomNavigationBar: MyBottomNavigationBar(
         onTap: (index) {
@@ -57,9 +55,9 @@ class _MainPageState extends State<MainPage>
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
-          TestPage1(),
+          CategoryPage(),
           TestPage2(),
-          TestPage3(),
+          TranslationDemo(),
         ],
       ),
     );
@@ -69,34 +67,6 @@ class _MainPageState extends State<MainPage>
   bool get wantKeepAlive => true;
 }
 
-class TestPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Page 1',
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-      ),
-    );
-  }
-}
-
-class TestPage1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Page 2',
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-      ),
-    );
-  }
-}
-
 class TestPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -104,20 +74,6 @@ class TestPage2 extends StatelessWidget {
       child: Center(
         child: Text(
           'Page 3',
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-      ),
-    );
-  }
-}
-
-class TestPage3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Page 4',
           style: Theme.of(context).textTheme.bodyText1,
         ),
       ),
