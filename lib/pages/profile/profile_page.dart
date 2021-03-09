@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/models/language.dart';
-import 'package:ikinokat/services/language_controller.dart';
+import 'package:ikinokat/pages/profile/provider/language_controller.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:provider/provider.dart';

@@ -16,9 +16,9 @@ class ProductItemModel {
   ProductItemModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         picurl = json['image'],
-        name_tm = json['name_tm'],
-        name_ru = json['name_ru'],
-        name_en = json['name_en'];
+        name_tm = json['name_tm'] ?? "",
+        name_ru = json['name_ru'] ?? "",
+        name_en = json['name_en'] ?? "";
 
   String getName(String languageCode) {
     if (languageCode == 'en') {

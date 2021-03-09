@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/home/provider/home_provider.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
@@ -36,39 +35,44 @@ class _HomePageContainerState extends State<HomePageContainer>
     final state = Provider.of<HomeProvider>(context);
     return state.loading
         ? MyLoadingWidget()
-        : Container(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-              child: SmartRefresher(
-                controller: state.refreshController,
-                onRefresh: () => state.initData(refresh: true),
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    /// sliders
-                    SliverToBoxAdapter(
-                      child: HeadSwiper(
-                        bannerList: state.sliders,
+        : InkWell(
+            onTap: () {
+              print(state.trandProducts);
+            },
+            child: Container(
+              child: GestureDetector(
+                onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                child: SmartRefresher(
+                  controller: state.refreshController,
+                  onRefresh: () => state.initData(refresh: true),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      /// sliders
+                      SliverToBoxAdapter(
+                        child: HeadSwiper(
+                          bannerList: state.sliders,
+                        ),
                       ),
-                    ),
 
-                    // vip products
-                    SliverToBoxAdapter(
-                      child: GridProducts(
-                        products: state.vipProducts,
+                      // vip products
+                      SliverToBoxAdapter(
+                        child: GridProducts(
+                          products: state.vipProducts,
+                        ),
                       ),
-                    ),
 
-                    // vip products
-                    SliverToBoxAdapter(
-                      child: GridProducts(
-                        products: state.vipProducts,
+                      // trand products
+                      SliverToBoxAdapter(
+                        child: GridProducts(
+                          products: state.trandProducts,
+                        ),
                       ),
-                    ),
 
-                    /// all products by scrolling up
-                  ],
-                  // +
-                  // _hotCommodity(state.hotList),
+                      /// all products by scrolling up
+                    ],
+                    // +
+                    // _hotCommodity(state.hotList),
+                  ),
                 ),
               ),
             ),

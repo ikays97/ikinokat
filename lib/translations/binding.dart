@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import 'language_controller.dart';
+import '../pages/profile/provider/language_controller.dart';
 
 class LanguageBinding extends Bindings {
   @override

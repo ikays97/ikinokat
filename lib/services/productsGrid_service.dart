@@ -5,6 +5,7 @@ import 'package:ikinokat/utils/request.dart';
 class ProductsGridAPI {
   static Future<ProductListModel> getProductsData(String route) async {
     var response = await RequestUtil().get(route);
+    // var response = await RequestUtil().get(route);
     return ProductListModel.fromJson(response['data']);
   }
 }

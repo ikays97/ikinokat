@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
-import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/category/category_page.dart';
 import 'package:ikinokat/pages/home/home_page.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
@@ -44,7 +43,6 @@ class _MainPageState extends State<MainPage>
     return Scaffold(
       bottomNavigationBar: MyBottomNavigationBar(
         onTap: (index) {
-          print(index);
           mainState.tabBarPageController.jumpToPage(index);
           setState(() {
             mainState.setTabBarSelectedIndex = index;

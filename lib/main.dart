@@ -6,10 +6,10 @@ import 'package:get/state_manager.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
-import 'package:ikinokat/services/binding.dart';
+import 'package:ikinokat/translations/binding.dart';
 import 'package:provider/provider.dart';
 import 'pages/main/main_page.dart';
-import 'services/app_translation.dart';
+import 'translations/app_translation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,8 +39,8 @@ class IKINOKATAPP extends StatelessWidget {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return GetMaterialApp(
       translationsKeys: AppTranslation.translationKeys,
-      locale: Locale('ru', 'RU'),
-      fallbackLocale: Locale('en', 'US'),
+      locale: Get.deviceLocale,
+      fallbackLocale: Locale('ru', 'RU'),
       title: "Iki Nokat Application",
       defaultTransition: Transition.fade,
       debugShowCheckedModeBanner: false,
