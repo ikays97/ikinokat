@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ikinokat/config/custom_color.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,14 +16,14 @@ const List<Map<String, String>> _tabBarData = [
     "selectedImage": "assets/icons/category.svg",
   },
   {
-    "title": "Add Product",
-    "image": "assets/icons/add.svg",
-    "selectedImage": "assets/icons/add.svg",
+    "title": "Search",
+    "image": "assets/icons/search.svg",
+    "selectedImage": "assets/icons/search.svg",
   },
   {
-    "title": "Profile",
-    "image": "assets/icons/person.svg",
-    "selectedImage": "assets/icons/person.svg",
+    "title": "Settings",
+    "image": "assets/icons/settings.svg",
+    "selectedImage": "assets/icons/settings.svg",
   },
 ];
 
@@ -54,9 +53,9 @@ class MyBottomNavigationBar extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               selectedFontSize: 10,
               unselectedFontSize: 10,
-              unselectedItemColor: CustomColors.unselectedItemColor,
-              selectedItemColor: CustomColors.selectedItemColor,
-              backgroundColor: CustomColors.backgroundColor,
+              unselectedItemColor:
+                  Theme.of(context).accentColor.withOpacity(0.4),
+              selectedItemColor: Theme.of(context).accentColor,
               elevation: 0,
               onTap: this.onTap,
               items: _getTabBar(context),
@@ -66,7 +65,7 @@ class MyBottomNavigationBar extends StatelessWidget {
         ),
         Divider(
           height: 0.5,
-          color: CustomColors.dividerColor,
+          color: Theme.of(context).primaryColor.withOpacity(0.5),
         ),
       ],
     );
@@ -93,6 +92,7 @@ class MyBottomNavigationBar extends StatelessWidget {
               image,
               width: _tabBarIconWidth,
               height: _tabBarIconHeight,
+              color: Theme.of(context).accentColor.withOpacity(0.5),
             ),
           ],
         ),
@@ -103,6 +103,7 @@ class MyBottomNavigationBar extends StatelessWidget {
             selectedImage,
             width: _tabBarIconWidth,
             height: _tabBarIconHeight,
+            color: Theme.of(context).accentColor,
           ),
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ikinokat/config/custom_color.dart';
 import 'package:ikinokat/pages/category/provider/category_provider.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
@@ -46,12 +45,11 @@ class _CategoryPageContainerState extends State<CategoryPageContainer>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final state = Provider.of<CategoryProvider>(context, listen: false);
+    final state = Provider.of<CategoryProvider>(context);
 
     return state.loading
         ? MyLoadingWidget()
         : Container(
-            color: CustomColors.backgroundColor,
             child: GestureDetector(
               onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
               child: TabBarView(

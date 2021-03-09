@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ikinokat/models/product.dart';
 import 'package:ikinokat/widgets/my_cached_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class GridProducts extends StatelessWidget {
   final String label;
@@ -10,13 +10,15 @@ class GridProducts extends StatelessWidget {
 
   //
   List<Widget> _buildGridItem(BuildContext context) {
+    final String code = Get.locale.languageCode;
+    print(code);
     final _screenWidth = MediaQuery.of(context).size.width;
     List<Widget> gridItemList = [];
     for (int i = 0; i < products.length; i++) {
       gridItemList.add(
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor.withOpacity(0.75),
             borderRadius: BorderRadius.circular(5),
           ),
           child: Column(
@@ -33,7 +35,7 @@ class GridProducts extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(left: 3),
                 child: Text(
-                  products[i].name_tm,
+                  products[i].getName(code),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyText2.copyWith(
@@ -58,7 +60,7 @@ class GridProducts extends StatelessWidget {
     return Container(
       // height: _containerHeight,
       width: _screenWidth - 20,
-      color: Color(0xD7EEEEEE),
+      color: Theme.of(context).cardColor,
       padding: EdgeInsets.all(15),
       // margin: EdgeInsets.only(top: 15, right: 15, bottom: 7.5, left: 15),
       child: Column(
@@ -83,7 +85,7 @@ class GridProducts extends StatelessWidget {
     return Container(
       height: _screenWidth * 0.12,
       child: Text(
-        "vip".tr(),
+        'vip',
         style: Theme.of(context).textTheme.headline5,
       ),
     );

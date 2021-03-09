@@ -120,13 +120,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.10"
-  easy_localization:
-    dependency: "direct main"
-    description:
-      name: easy_localization
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.3.3"
   fake_async:
     dependency: transitive
     description:
@@ -231,6 +224,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.26.0"
   http:
     dependency: transitive
     description:

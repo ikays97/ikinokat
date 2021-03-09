@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
-import 'package:ikinokat/config/custom_color.dart';
+import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/category/category_page.dart';
 import 'package:ikinokat/pages/home/home_page.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/utils/navigator.dart';
+import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_bottom_navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final mainState = Provider.of<MainProvider>(context, listen: false);
+    final mainState = Provider.of<MainProvider>(context);
     MyNavigator.ctx = context;
     ScreenUtil.init(
       context,
@@ -41,9 +42,9 @@ class _MainPageState extends State<MainPage>
       allowFontScaling: true,
     );
     return Scaffold(
-      backgroundColor: CustomColors.backgroundColor,
       bottomNavigationBar: MyBottomNavigationBar(
         onTap: (index) {
+          print(index);
           mainState.tabBarPageController.jumpToPage(index);
           setState(() {
             mainState.setTabBarSelectedIndex = index;
@@ -57,7 +58,7 @@ class _MainPageState extends State<MainPage>
           HomePage(),
           CategoryPage(),
           TestPage2(),
-          TranslationDemo(),
+          SettingsPage(),
         ],
       ),
     );
@@ -70,11 +71,24 @@ class _MainPageState extends State<MainPage>
 class TestPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Page 3',
-          style: Theme.of(context).textTheme.bodyText1,
+    return Scaffold(
+      appBar: MyAppBar(
+        leadingType: AppBarBackType.None,
+        title: Text(
+          'Search',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+      ),
+      body: Container(
+        color: Theme.of(context).cardColor,
+        child: Center(
+          child: Text(
+            'search',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
         ),
       ),
     );

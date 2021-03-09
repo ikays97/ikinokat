@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ikinokat/config/custom_color.dart';
 
 /// appbar
 enum AppBarBackType { Back, Close, None }
@@ -32,7 +31,6 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
               ),
           centerTitle: centerTitle,
           brightness: brightness ?? Brightness.dark,
-          backgroundColor: backgroundColor ?? CustomColors.appBarColor,
           leading: leading ??
               (leadingType == AppBarBackType.None
                   ? null
@@ -79,9 +77,9 @@ class AppBarBack extends StatelessWidget {
                   color: color ?? Color(0xFF222222), size: 24.0),
             )
           : Container(
-              padding: EdgeInsets.only(right: 15),
+              margin: EdgeInsets.only(right: 15, left: 10),
               child: Image.asset(
-                'assets/images/nav/nav_back.png',
+                'assets/icons/nav_back.png',
                 color: color,
               ),
             ),

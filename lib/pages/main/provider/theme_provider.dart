@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ikinokat/config/custom_color.dart';
+import 'package:ikinokat/config/custom_theme.dart';
 
 class CustomTheme with ChangeNotifier {
   static bool _isDarkTheme = false;

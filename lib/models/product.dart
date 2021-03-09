@@ -19,6 +19,16 @@ class ProductItemModel {
         name_tm = json['name_tm'],
         name_ru = json['name_ru'],
         name_en = json['name_en'];
+
+  String getName(String languageCode) {
+    if (languageCode == 'en') {
+      return this.name_en;
+    } else if (languageCode == 'tm') {
+      return this.name_tm;
+    } else {
+      return this.name_ru;
+    }
+  }
 }
 
 class ProductListModel {

@@ -36,7 +36,6 @@ class HomeProvider with ChangeNotifier {
       loading = false;
       refreshController.refreshCompleted();
     }
-
     notifyListeners();
   }
 }

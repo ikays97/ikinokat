@@ -1,141 +1,123 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:ikinokat/config/custom_theme.dart';
+import 'package:ikinokat/models/language.dart';
+import 'package:ikinokat/services/language_controller.dart';
+import 'package:ikinokat/utils/navigator.dart';
+import 'package:ikinokat/widgets/my_appbar.dart';
+import 'package:provider/provider.dart';
+import 'provider/theme_provider.dart';
 
-class TranslationDemo extends StatefulWidget {
-  @override
-  _TranslationDemoState createState() => _TranslationDemoState();
-}
-
-class _TranslationDemoState extends State<TranslationDemo> {
-  String dropdownValue = 'English - US';
-
+class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: MyAppBar(
+        leadingType: AppBarBackType.None,
+        title: Text(
+          'Settings',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+      ),
+      body: SettingsPageContainer(),
+    );
+  }
+}
+
+class SettingsPageContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    return Container(
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          GestureDetector(
+            onTap: () {
+              MyNavigator.push(LanguageSelectPage());
+            },
+            child: Card(
+              child: ListTile(
+                leading: Icon(Icons.language_outlined),
+                title: Row(
+                  children: [
+                    Text('language'.tr),
+                    Spacer(),
+                    Text("${Get.locale.languageCode}"),
+                  ],
+                ),
+                trailing: Icon(Icons.arrow_right),
+              ),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: Icon(Icons.wb_sunny_outlined),
+              title: Row(
+                children: [
+                  Text('dark mode'),
+                  Spacer(),
+                  CupertinoSwitch(
+                    value: themeNotifier.getTheme == darkTheme,
+                    onChanged: (value) async {
+                      (value)
+                          ? themeNotifier.setTheme(darkTheme)
+                          : themeNotifier.setTheme(lightTheme);
+                      // var prefs = await SharedPreferences.getInstance();
+                      // prefs.setBool('darkMode', value);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // RaisedButton(
+          //   onPressed: () => Get.toNamed("/details"),
+          //   child: Text("Go To Next Page"),
+          // )
+        ],
+      ),
+    );
+  }
+}
+
+class LanguageSelectPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final LanguageController _controller = Get.find<LanguageController>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Localization Demo"),
+      appBar: MyAppBar(
+        backgroundColor: Theme.of(context).cardColor,
+        leadingType: AppBarBackType.Back,
+        title: Text('Select language'),
       ),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-              child: Row(
-                children: [
-                  Text(
-                    "vip".tr(),
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ).tr(),
-                  Expanded(
-                      child: Container(
-                    margin: EdgeInsets.only(left: 20),
-                    child: Text(
-                      "trand".tr(),
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ).tr(),
-                  )),
-                ],
-              ),
-            ),
-            Container(
-              width: width,
-              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Row(
-                children: [
-                  Text(
-                    "trand".tr() + ":",
-                    style: TextStyle(fontSize: 15),
-                  ).tr(),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 50),
-              width: width,
-              alignment: Alignment.center,
-              child: Container(
-                height: 40,
-                padding: EdgeInsets.only(left: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  border: Border.all(color: Colors.black, width: .9),
-                ),
-                child: Container(
-                    padding: EdgeInsets.only(left: 4, right: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        DropdownButton<String>(
-                          icon: Container(
-                            padding: EdgeInsets.only(
-                              left: 10,
-                            ),
-                            height: 30,
-                            width: 30,
-                          ),
-                          iconSize: 18,
-                          elevation: 16,
-                          value: dropdownValue,
-                          style: TextStyle(color: Colors.black),
-                          underline: Container(
-                            padding: EdgeInsets.only(left: 4, right: 4),
-                            color: Colors.transparent,
-                          ),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              if (newValue == 'English - UK') {
-                                this.setState(() {
-                                  dropdownValue = 'English - UK';
-                                  context.locale = Locale('en', 'UK');
-                                });
-                              } else if (newValue == 'Russian - RU') {
-                                this.setState(() {
-                                  dropdownValue = 'Russian - RU';
-                                  context.locale = Locale('ru', 'RU');
-                                });
-                              } else if (newValue == 'Turkmen - TM') {
-                                this.setState(() {
-                                  dropdownValue = 'Turkmen - TM';
-                                  context.locale = Locale('en', 'US');
-                                });
-                              }
-                            });
-                          },
-                          items: <String>[
-                            'English - UK',
-                            'Russian - RU',
-                            'Turkmen - TM',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 3),
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            size: 18,
-                          ),
+        child: ListView(
+          children: languages.map((lang) {
+            return InkWell(
+              onTap: () {
+                _controller.changeLanguage = lang.symbol;
+              },
+              child: Card(
+                child: ListTile(
+                  leading: Text(lang.symbol),
+                  title: Text(lang.language),
+                  trailing: lang.symbol == Get.locale.languageCode
+                      ? SvgPicture.asset(
+                          "assets/icons/tick.svg",
+                          height: 35,
                         )
-                      ],
-                    )),
+                      : null,
+                ),
               ),
-            )
-          ],
+            );
+          }).toList(),
         ),
       ),
     );

@@ -1,30 +1,29 @@
 import 'dart:io';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/state_manager.dart';
+import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
+import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
+import 'package:ikinokat/services/binding.dart';
 import 'package:provider/provider.dart';
 import 'pages/main/main_page.dart';
+import 'services/app_translation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    EasyLocalization(
-      path: 'assets/locales',
-      fallbackLocale: Locale('en', 'US'),
-      supportedLocales: [
-        Locale('en', 'UK'),
-        Locale('ru', 'RU'),
-        Locale('en', 'US'),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MainProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeNotifier(lightTheme),
+        ),
       ],
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => MainProvider(),
-          ),
-        ],
-        child: IKINOKATAPP(),
-      ),
+      child: IKINOKATAPP(),
     ),
   );
   if (Platform.isAndroid) {
@@ -37,12 +36,16 @@ void main() async {
 class IKINOKATAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+    return GetMaterialApp(
+      translationsKeys: AppTranslation.translationKeys,
+      locale: Locale('ru', 'RU'),
+      fallbackLocale: Locale('en', 'US'),
+      title: "Iki Nokat Application",
+      defaultTransition: Transition.fade,
       debugShowCheckedModeBanner: false,
-      title: 'Iki Nokat',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
+      initialBinding: LanguageBinding(),
+      theme: themeNotifier.getTheme,
       home: MainPage(),
     );
   }
