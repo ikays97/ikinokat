@@ -20,7 +20,7 @@ class ProductDetailPage extends StatelessWidget {
         ),
         body: Builder(
           builder: (context) => SafeArea(
-            child: 
+            child: ProductDetailPageContainer(),
           ),
         ),
       ),
