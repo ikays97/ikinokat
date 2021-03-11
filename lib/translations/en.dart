@@ -1,6 +1,8 @@
 final Map<String, String> en = {
   'language': 'language',
   'day': 'daytyssss',
+  'markets': 'markets',
+  'product': 'Product',
 
   // add page
   "add_new_product": "New Product",

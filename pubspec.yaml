@@ -1,5 +1,5 @@
 name: ikinokat
-description: A new Flutter project.
+description: ikinokat wholesale e-commerce application.
 publish_to: 'none' 
 version: 1.0.0+1
 
@@ -26,6 +26,7 @@ dependencies:
   flutter_splash_screen: ^0.1.0
   pull_to_refresh: 1.6.3
   flutter_svg: ^0.19.0
+  url_launcher: ^5.7.10
   
 
 dev_dependencies:
@@ -40,6 +41,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/locales/
+    - assets/images/
 
   # fonts:
   #   - family: Schyler

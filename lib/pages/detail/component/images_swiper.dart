@@ -18,19 +18,18 @@ class _ImagesSwiperState extends State<ImagesSwiper> {
 
   @override
   Widget build(BuildContext context) {
+    // final deviceWidth = MediaQuery.of(context).size.width;
+    final deviceHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: 135.0 + 30,
+      height: deviceHeight * 0.3,
       color: Colors.white,
       child: Swiper(
         autoplay: true,
         autoplayDelay: 4000,
         duration: 750,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 135,
-            child: MyCachedNetworkImage(
-              imageurl: widget.imagesList[index]['image'],
-            ),
+          return MyCachedNetworkImage(
+            imageurl: widget.imagesList[index]['image'],
           );
         },
         itemCount: widget.imagesList.length,

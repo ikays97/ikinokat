@@ -3,7 +3,7 @@ import 'package:ikinokat/pages/category/provider/category_provider.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:get/get.dart';
 import 'components/my_tab.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -20,10 +20,10 @@ class CategoryPage extends StatelessWidget {
               indicatorColor: Color(0xFFD1C3BC),
               tabs: [
                 Tab(
-                  text: 'Category',
+                  text: 'categories'.tr,
                 ),
                 Tab(
-                  text: 'Markets',
+                  text: 'markets'.tr,
                 ),
               ],
             ),

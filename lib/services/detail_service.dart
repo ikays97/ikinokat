@@ -6,4 +6,10 @@ class DetailAPI {
     var response = await RequestUtil().get('product/$id');
     return DetailItemModel.fromJson(response['data']);
   }
+
+  static Future<bool> orderProduct(int id, data) async {
+    var response = await RequestUtil().post('product/$id/order', params: data);
+    print(response);
+    return true;
+  }
 }

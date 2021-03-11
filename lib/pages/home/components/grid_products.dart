@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ikinokat/models/product.dart';
-import 'package:ikinokat/pages/product/detail.dart';
+import 'package:ikinokat/pages/detail/detail.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_cached_image.dart';
 
 class GridProducts extends StatelessWidget {
   final String label;
   final List<ProductItemModel> products;
-  const GridProducts({Key key, this.products, this.label}) : super(key: key);
+  const GridProducts({
+    Key key,
+    @required this.products,
+    @required this.label,
+  }) : super(key: key);
 
   //
   List<Widget> _buildGridItem(BuildContext context) {
@@ -96,7 +100,7 @@ class GridProducts extends StatelessWidget {
     return Container(
       height: _screenWidth * 0.12,
       child: Text(
-        'vip',
+        label.tr,
         style: Theme.of(context).textTheme.headline5,
       ),
     );

@@ -35,44 +35,41 @@ class _HomePageContainerState extends State<HomePageContainer>
     final state = Provider.of<HomeProvider>(context);
     return state.loading
         ? MyLoadingWidget()
-        : InkWell(
-            onTap: () {
-              print(state.trandProducts);
-            },
-            child: Container(
-              child: GestureDetector(
-                onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-                child: SmartRefresher(
-                  controller: state.refreshController,
-                  onRefresh: () => state.initData(refresh: true),
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      /// sliders
-                      SliverToBoxAdapter(
-                        child: HeadSwiper(
-                          bannerList: state.sliders,
-                        ),
+        : Container(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+              child: SmartRefresher(
+                controller: state.refreshController,
+                onRefresh: () => state.initData(refresh: true),
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    // sliders
+                    SliverToBoxAdapter(
+                      child: HeadSwiper(
+                        bannerList: state.sliders,
                       ),
+                    ),
 
-                      // vip products
-                      SliverToBoxAdapter(
-                        child: GridProducts(
-                          products: state.vipProducts,
-                        ),
+                    // vip products
+                    SliverToBoxAdapter(
+                      child: GridProducts(
+                        label: 'vip_products',
+                        products: state.vipProducts,
                       ),
+                    ),
 
-                      // trand products
-                      SliverToBoxAdapter(
-                        child: GridProducts(
-                          products: state.trandProducts,
-                        ),
+                    // trand products
+                    SliverToBoxAdapter(
+                      child: GridProducts(
+                        label: 'trand_products',
+                        products: state.trandProducts,
                       ),
+                    ),
 
-                      /// all products by scrolling up
-                    ],
-                    // +
-                    // _hotCommodity(state.hotList),
-                  ),
+                    /// all products by scrolling up
+                  ],
+                  // +
+                  // _hotCommodity(state.hotList),
                 ),
               ),
             ),

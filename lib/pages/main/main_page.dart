@@ -9,6 +9,7 @@ import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_bottom_navbar.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -73,7 +74,7 @@ class TestPage2 extends StatelessWidget {
       appBar: MyAppBar(
         leadingType: AppBarBackType.None,
         title: Text(
-          'Search',
+          "search_bar_label".tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -84,7 +85,7 @@ class TestPage2 extends StatelessWidget {
         color: Theme.of(context).cardColor,
         child: Center(
           child: Text(
-            'search',
+            "search_bar_label".tr,
             style: Theme.of(context).textTheme.bodyText1,
           ),
         ),

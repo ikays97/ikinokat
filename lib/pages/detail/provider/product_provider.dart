@@ -17,4 +17,16 @@ class ProductDetailProvider with ChangeNotifier {
     loading = false;
     notifyListeners();
   }
+
+  Future<void> orderProduct(String name, String phone, String message) async {
+    assert(name != null);
+    assert(phone != null);
+    assert(message != null);
+    Map<String, dynamic> data = {
+      'name': name,
+      'phone': phone,
+      'message': message,
+    };
+    await DetailAPI.orderProduct(productId, data);
+  }
 }
