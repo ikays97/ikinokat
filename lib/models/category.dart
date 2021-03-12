@@ -11,6 +11,15 @@ class CategoryModel {
         name_ru = json['name_ru'],
         name_en = json['name_en'],
         icon = json['icon'];
+  String getName(String languageCode) {
+    if (languageCode == 'en') {
+      return this.name_en;
+    } else if (languageCode == 'tm') {
+      return this.name_tm;
+    } else {
+      return this.name_ru;
+    }
+  }
 }
 
 class CategoryModelList {

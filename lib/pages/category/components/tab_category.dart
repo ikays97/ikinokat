@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ikinokat/pages/category/provider/category_provider.dart';
+import 'package:ikinokat/pages/category_products/category_products_page.dart';
+import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +17,7 @@ class _CategoryPageContainerState extends State<CategoryPageContainer>
   Widget build(BuildContext context) {
     super.build(context);
     final state = Provider.of<CategoryProvider>(context);
-
+    final langCode = Get.locale.languageCode;
     return state.loading
         ? MyLoadingWidget()
         : Container(
@@ -23,9 +26,21 @@ class _CategoryPageContainerState extends State<CategoryPageContainer>
               child: SingleChildScrollView(
                 child: Column(
                   children: state.categories.map((item) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(item.name_tm),
+                    return InkWell(
+                      onTap: () {
+                        MyNavigator.push(
+                          CategoryProductsPage(
+                            categoryID: item.id,
+                            categoryName: item.getName(langCode),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        child: ListTile(
+                          title: Text(
+                            item.getName(langCode),
+                          ),
+                        ),
                       ),
                     );
                   }).toList(),
