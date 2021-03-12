@@ -6,6 +6,8 @@ final Map<String, String> en = {
   'marka_yok': "Supplier doesn't have any brand",
   'settings': 'Settings',
   'select_language': 'Select Language',
+  'no_info': 'no info',
+  'empty': 'empty',
 
   // add page
   "add_new_product": "New Product",

@@ -40,13 +40,13 @@ class DetailDataTable extends StatelessWidget {
               arg["icon"],
               color: Theme.of(context).accentColor,
             ),
-            title: Text(arg["data"]),
+            title: Text(arg["data"] ?? 'no_info'.tr),
           );
         }
         return CustomDataRow(
           icon: arg["icon"],
           label: arg["label"],
-          data: arg["data"],
+          data: arg["data"] ?? 'empty'.tr,
         );
       }).toList(),
     );
@@ -74,11 +74,11 @@ class CustomDataRow extends StatelessWidget {
         color: Theme.of(context).accentColor.withOpacity(0.9),
       ),
       title: Text(
-        label.tr,
+        label.tr ?? 'girizilmedik',
         style: Theme.of(context).textTheme.bodyText2,
       ),
       trailing: Text(
-        '$data',
+        data.toString(),
         style: Theme.of(context).textTheme.bodyText2,
       ),
     );

@@ -10,6 +10,7 @@ class MyCachedNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageurl,
       placeholder: (_, __) => Image.asset('assets/icons/amazon.png'),
+      errorWidget: (_, error, __) => Image.asset('assets/icons/amazon.png'),
       fit: BoxFit.cover,
     );
   }

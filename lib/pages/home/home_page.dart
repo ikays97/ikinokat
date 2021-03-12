@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/pages/home/provider/home_provider.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
@@ -46,6 +47,26 @@ class _HomePageContainerState extends State<HomePageContainer>
                   enablePullUp: true,
                   onLoading: state.loadData,
                   onRefresh: () => state.initData(refresh: true),
+                  footer: CustomFooter(
+                    builder: (BuildContext context, LoadStatus mode) {
+                      Widget body;
+                      if (mode == LoadStatus.idle) {
+                        body = Text("has köp ýüklemek üçin çekiň");
+                      } else if (mode == LoadStatus.loading) {
+                        body = CupertinoActivityIndicator();
+                      } else if (mode == LoadStatus.failed) {
+                        body = Text("Gaýtadan synanyşyň!");
+                      } else if (mode == LoadStatus.canLoading) {
+                        body = Text("Has köp ýüklemek üçin goýberiň");
+                      } else {
+                        body = Text("Ählisi...");
+                      }
+                      return Container(
+                        height: 55,
+                        child: Center(child: body),
+                      );
+                    },
+                  ),
                   child: CustomScrollView(
                     slivers: <Widget>[
                       // sliders
