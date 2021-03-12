@@ -22,6 +22,7 @@ class SupplierPage extends StatelessWidget {
       create: (_) => SupplierProvider(supplierId: id),
       child: Scaffold(
         appBar: MyAppBar(
+          context: context,
           leadingType: AppBarBackType.Back,
           title: Text('productd_all_products'.tr),
         ),

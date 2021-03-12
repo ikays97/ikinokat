@@ -1,41 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ikinokat/pages/home/provider/home_provider.dart';
-import 'package:ikinokat/widgets/my_appbar.dart';
+import 'package:ikinokat/pages/home/components/grid_products.dart';
+import 'package:ikinokat/pages/search/provider/search_provider.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'components/grid_products.dart';
-import 'components/swiper.dart';
 
-class HomePage extends StatelessWidget {
+class SearchPageContainer extends StatelessWidget {
+  final String query;
+
+  const SearchPageContainer({Key key, this.query}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => HomeProvider(),
-      child: Scaffold(
-        appBar: MyAppBar(
-          context: context,
-          backgroundColor: Theme.of(context).canvasColor,
-          leadingType: AppBarBackType.None,
-        ),
-        body: HomePageContainer(),
-      ),
+      create: (_) => SearchProvider(query: query),
+      child: ResultContainer(),
     );
   }
 }
 
-class HomePageContainer extends StatefulWidget {
+class ResultContainer extends StatefulWidget {
   @override
-  _HomePageContainerState createState() => _HomePageContainerState();
+  _ResultContainerState createState() => _ResultContainerState();
 }
 
-class _HomePageContainerState extends State<HomePageContainer>
-    with AutomaticKeepAliveClientMixin {
+class _ResultContainerState extends State<ResultContainer> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    final state = Provider.of<HomeProvider>(context);
+    final state = Provider.of<SearchProvider>(context);
     return state.loading
         ? MyLoadingWidget()
         : Padding(
@@ -47,7 +39,7 @@ class _HomePageContainerState extends State<HomePageContainer>
                   controller: state.refreshController,
                   enablePullUp: true,
                   onLoading: state.loadData,
-                  onRefresh: () => state.initData(refresh: true),
+                  onRefresh: () => state.getData(refresh: true),
                   footer: CustomFooter(
                     builder: (BuildContext context, LoadStatus mode) {
                       Widget body;
@@ -70,33 +62,9 @@ class _HomePageContainerState extends State<HomePageContainer>
                   ),
                   child: CustomScrollView(
                     slivers: <Widget>[
-                      // sliders
-                      SliverToBoxAdapter(
-                        child: HeadSwiper(
-                          bannerList: state.sliders,
-                        ),
-                      ),
-
-                      // vip products
                       SliverToBoxAdapter(
                         child: GridProducts(
-                          label: 'vip_products',
-                          products: state.vipProducts,
-                        ),
-                      ),
-
-                      // trand products
-                      SliverToBoxAdapter(
-                        child: GridProducts(
-                          label: 'trand_products',
-                          products: state.trandProducts,
-                        ),
-                      ),
-
-                      SliverToBoxAdapter(
-                        child: GridProducts(
-                          label: 'all_products',
-                          products: state.allProducts,
+                          products: state.products,
                         ),
                       ),
 
@@ -110,7 +78,4 @@ class _HomePageContainerState extends State<HomePageContainer>
             ),
           );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

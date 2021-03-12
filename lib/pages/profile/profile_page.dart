@@ -16,6 +16,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
+        context: context,
         leadingType: AppBarBackType.None,
         title: Text(
           'settings'.tr,

@@ -14,6 +14,7 @@ class CategoryPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: MyAppBar(
+          context: context,
           leadingType: AppBarBackType.None,
           bottom: TabBar(
             indicatorColor: Color(0xFFD1C3BC),

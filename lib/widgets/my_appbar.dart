@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ikinokat/pages/search/search_page.dart';
 
 /// appbar
 enum AppBarBackType { Back, Close, None }
@@ -19,6 +20,7 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
     bool centerTitle = false,
     double elevation,
     PreferredSizeWidget bottom,
+    BuildContext context,
   }) : super(
           key: key,
           title: title ??
@@ -40,12 +42,17 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
                       onWillPop: onWillPop,
                     )),
           actions: [
-            Container(
-              margin: EdgeInsets.only(right: 15, bottom: 5),
-              height: 45,
-              child: SvgPicture.asset(
-                "assets/icons/search.svg",
-                color: Colors.white,
+            InkWell(
+              onTap: () {
+                showSearch(context: context, delegate: SearchPage());
+              },
+              child: Container(
+                margin: EdgeInsets.only(right: 15, bottom: 5),
+                height: 45,
+                child: SvgPicture.asset(
+                  "assets/icons/search.svg",
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

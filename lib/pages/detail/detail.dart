@@ -15,6 +15,7 @@ class ProductDetailPage extends StatelessWidget {
       create: (_) => ProductDetailProvider(productId: id),
       child: Scaffold(
         appBar: MyAppBar(
+          context: context,
           backgroundColor: Theme.of(context).canvasColor,
           leadingType: AppBarBackType.Back,
           title: Text('product'.tr),

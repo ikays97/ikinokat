@@ -8,4 +8,12 @@ class ProductsGridAPI {
     // var response = await RequestUtil().get(route);
     return ProductListModel.fromJson(response['data']);
   }
+
+  static Future<ProductListModel> searchProduct(
+      String route, String query) async {
+    Map<String, String> data = {'search': query};
+    var response = await RequestUtil().post(route, params: data);
+    // var response = await RequestUtil().get(route);
+    return ProductListModel.fromJson(response['data']);
+  }
 }
