@@ -102,8 +102,10 @@ class LanguageSelectPage extends StatelessWidget {
         child: ListView(
           children: languages.map((lang) {
             return InkWell(
-              onTap: () {
+              onTap: () async {
                 _controller.changeLanguage = lang.symbol;
+                var prefs = await SharedPreferences.getInstance();
+                prefs.setString('language', lang.symbol);
               },
               child: Card(
                 child: ListTile(

@@ -18,12 +18,7 @@ class DetailDataTable extends StatelessWidget {
       {
         "icon": 'assets/icons/tag.svg',
         "label": 'productd_price',
-        "data": product.price,
-      },
-      {
-        "icon": 'assets/icons/pen.svg',
-        "label": 'productd_min',
-        "data": product.min_qua,
+        "data": product.price ?? 'negotiable'.tr,
       },
       {
         "icon": 'assets/icons/doc.svg',

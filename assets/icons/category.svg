@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-<path d="M8.775,24.477h12.914c0.553,0,1-0.447,1-1V10.563c0-0.553-0.447-1-1-1H8.775c-0.553,0-1,0.447-1,1v12.914
-	C7.775,24.029,8.223,24.477,8.775,24.477z M9.775,11.563h10.914v10.914H9.775V11.563z"/>
-<path d="M25.861,24.477h12.914c0.553,0,1-0.447,1-1V10.563c0-0.553-0.447-1-1-1H25.861c-0.553,0-1,0.447-1,1v12.914
-	C24.861,24.029,25.309,24.477,25.861,24.477z M26.861,11.563h10.914v10.914H26.861V11.563z"/>
-<path d="M8.775,41.563h12.914c0.553,0,1-0.447,1-1V27.648c0-0.553-0.447-1-1-1H8.775c-0.553,0-1,0.447-1,1v12.914
-	C7.775,41.115,8.223,41.563,8.775,41.563z M9.775,28.648h10.914v10.914H9.775V28.648z"/>
-<path d="M24.861,40.563c0,0.553,0.447,1,1,1h12.914c0.553,0,1-0.447,1-1V27.648c0-0.553-0.447-1-1-1H25.861c-0.553,0-1,0.447-1,1
-	V40.563z M26.861,28.648h10.914v10.914H26.861V28.648z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>36. Group of cards</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="36.-Group-of-cards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(2.000000, 2.000000)" stroke="#222F3E" stroke-width="4">
+            <polygon id="Layer-1" points="0 0 40 0 40 40 0 40"></polygon>
+            <polygon id="Layer-2" points="56 0 96 0 96 40 56 40"></polygon>
+            <polygon id="Layer-3" points="56 56 96 56 96 96 56 96"></polygon>
+            <polygon id="Layer-4" points="0 56 40 56 40 96 0 96"></polygon>
+        </g>
+    </g>
 </svg>

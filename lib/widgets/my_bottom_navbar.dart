@@ -51,8 +51,8 @@ class MyBottomNavigationBar extends StatelessWidget {
             return BottomNavigationBar(
               currentIndex: index,
               type: BottomNavigationBarType.fixed,
-              selectedFontSize: 10,
-              unselectedFontSize: 10,
+              selectedFontSize: 0,
+              unselectedFontSize: 0,
               unselectedItemColor:
                   Theme.of(context).accentColor.withOpacity(0.4),
               selectedItemColor: Theme.of(context).accentColor,
@@ -82,7 +82,7 @@ class MyBottomNavigationBar extends StatelessWidget {
       String title, String image, String selectedImage, BuildContext context) {
     final _screenWidth = MediaQuery.of(context).size.width;
     final _tabBarIconWidth = _screenWidth / _tabBarData.length;
-    const _tabBarIconHeight = 22.0;
+    const _tabBarIconHeight = 26.0;
 
     return BottomNavigationBarItem(
       icon: Container(
@@ -107,7 +107,7 @@ class MyBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
-      label: title,
+      label: '',
     );
   }
 }

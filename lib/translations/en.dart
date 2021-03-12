@@ -8,6 +8,7 @@ final Map<String, String> en = {
   'select_language': 'Select Language',
   'no_info': 'no info',
   'empty': 'empty',
+  'negotiable': 'negotiable',
 
   // add page
   "add_new_product": "New Product",

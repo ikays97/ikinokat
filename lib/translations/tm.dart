@@ -1,6 +1,14 @@
 final Map<String, String> tm = {
-  'language': 'dil',
-  'day': 'bet gun',
+  'language': 'Dil',
+  'dark': 'Garaňky tema',
+  'markets': 'Bazarlar',
+  'product': 'Haryt',
+  'marka_yok': "Marka ýok",
+  'settings': 'Sazlamalar',
+  'select_language': 'Dil Saýla',
+  'no_info': 'Maglumat ýok',
+  'empty': 'boş',
+  'negotiable': 'ylalaşykly',
 
   // add page
   "add_new_product": "Täze haryt",

@@ -16,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.getInstance().then((prefs) {
     var darkModeOn = prefs.getBool('darkMode') ?? true;
+    var selectedLang = prefs.getString('language') ?? 'ru';
     return runApp(
       MultiProvider(
         providers: [
@@ -26,7 +27,7 @@ void main() async {
             create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
           ),
         ],
-        child: IKINOKATAPP(),
+        child: IKINOKATAPP(lang: selectedLang),
       ),
     );
   });
@@ -39,12 +40,16 @@ void main() async {
 }
 
 class IKINOKATAPP extends StatelessWidget {
+  final String lang;
+
+  const IKINOKATAPP({Key key, this.lang}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return GetMaterialApp(
       translationsKeys: AppTranslation.translationKeys,
-      locale: Get.deviceLocale,
+      locale:
+          lang == null ? Get.deviceLocale : Locale(lang, lang.toUpperCase()),
       fallbackLocale: Locale('ru', 'RU'),
       title: "Iki Nokat Application",
       defaultTransition: Transition.fade,

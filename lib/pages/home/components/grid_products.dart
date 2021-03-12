@@ -29,43 +29,47 @@ class GridProducts extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  height: _screenWidth * 0.3,
-                  width: _screenWidth * 0.3,
-                  padding: EdgeInsets.only(bottom: 12),
-                  child: MyCachedNetworkImage(
-                    imageurl: products[i].picurl,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 3),
-                  child: Text(
-                    // products[i].getName(code),
-                    products[i].getName(code),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          fontSize: 12,
-                        ),
-                  ),
-                ),
-                if (products[i].price != null)
-                  Container(
-                    margin: EdgeInsets.only(left: 3),
-                    child: Text(
-                      // products[i].getName(code),
-                      products[i].price,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(color: Colors.redAccent),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    height: _screenWidth * 0.3,
+                    width: _screenWidth * 0.3,
+                    // padding: EdgeInsets.only(bottom: 2),
+                    child: MyCachedNetworkImage(
+                      imageurl: products[i].picurl,
                     ),
                   ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 3, top: 5),
+                    child: Text(
+                      // products[i].getName(code),
+                      products[i].getName(code),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            fontSize: 12,
+                          ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    // products[i].getName(code),
+                    products[i].price ?? 'negotiable'.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(color: Colors.orangeAccent),
+                  ),
+                ),
               ],
             ),
           ),
@@ -85,7 +89,7 @@ class GridProducts extends StatelessWidget {
       // height: _containerHeight,
       width: _screenWidth - 20,
       // padding: EdgeInsets.all(15),
-      // margin: EdgeInsets.only(top: 15, right: 15, bottom: 7.5, left: 15),
+      margin: EdgeInsets.only(top: 15),
       child: Column(
         children: [
           if (label != null) _buildLabel(context, label),
