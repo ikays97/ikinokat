@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ikinokat/models/detail.dart';
 import 'package:get/get.dart';
 
@@ -7,57 +8,79 @@ class DetailDataTable extends StatelessWidget {
 
   const DetailDataTable({Key key, this.product}) : super(key: key);
   Widget build(BuildContext context) {
+    final langCode = Get.locale.languageCode;
+    List args = [
+      {
+        "icon": 'assets/icons/view.svg',
+        "label": 'productd_preview',
+        "data": product.preview,
+      },
+      {
+        "icon": 'assets/icons/tag.svg',
+        "label": 'productd_price',
+        "data": product.price,
+      },
+      {
+        "icon": 'assets/icons/pen.svg',
+        "label": 'productd_min',
+        "data": product.min_qua,
+      },
+      {
+        "icon": 'assets/icons/doc.svg',
+        "label": 'productd_desc',
+        "data": product.getDesc(langCode),
+      },
+    ];
     return Column(
-      children: [
-        Divider(color: Theme.of(context).cardColor),
-        ListTile(
-          dense: true,
-          leading: Icon(Icons.person),
-          title: Text(
-            'productd_preview'.tr,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-          trailing: Text(
-            '${product.preview}',
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ),
-        Divider(),
-        ListTile(
-          dense: true,
-          leading: Icon(Icons.money),
-          title: Text(
-            'productd_price'.tr,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-          trailing: Text(
-            '${product.price}',
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ),
-        Divider(),
-        if (product.min_qua != null)
-          ListTile(
+      children: args.map((arg) {
+        if (arg == args.last) {
+          return ListTile(
             dense: true,
-            leading: Icon(Icons.confirmation_number),
-            title: Text(
-              'productd_min'.tr,
-              style: Theme.of(context).textTheme.bodyText2,
+            leading: SvgPicture.asset(
+              arg["icon"],
+              color: Theme.of(context).accentColor,
             ),
-            trailing: Text(
-              '${product.min_qua}',
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ),
-        ListTile(
-          dense: true,
-          leading: Icon(Icons.info),
-          title: Text(
-            'productd_desc'.tr,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        ),
-      ],
+            title: Text(arg["data"]),
+          );
+        }
+        return CustomDataRow(
+          icon: arg["icon"],
+          label: arg["label"],
+          data: arg["data"],
+        );
+      }).toList(),
+    );
+  }
+}
+
+class CustomDataRow extends StatelessWidget {
+  const CustomDataRow({
+    Key key,
+    @required this.icon,
+    @required this.label,
+    @required this.data,
+  }) : super(key: key);
+
+  final String label;
+  final dynamic data;
+  final String icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      dense: true,
+      leading: SvgPicture.asset(
+        icon,
+        color: Theme.of(context).accentColor.withOpacity(0.9),
+      ),
+      title: Text(
+        label.tr,
+        style: Theme.of(context).textTheme.bodyText2,
+      ),
+      trailing: Text(
+        '$data',
+        style: Theme.of(context).textTheme.bodyText2,
+      ),
     );
   }
 }

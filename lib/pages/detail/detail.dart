@@ -15,6 +15,7 @@ class ProductDetailPage extends StatelessWidget {
       create: (_) => ProductDetailProvider(productId: id),
       child: Scaffold(
         appBar: MyAppBar(
+          backgroundColor: Theme.of(context).canvasColor,
           leadingType: AppBarBackType.Back,
           title: Text('product'.tr),
         ),
@@ -32,6 +33,6 @@ class ProductDetailPageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<ProductDetailProvider>(context);
-    return state.loading ? MyLoadingWidget() : SupplierSection();
+    return state.loading ? MyLoadingWidget() : DetailSection();
   }
 }

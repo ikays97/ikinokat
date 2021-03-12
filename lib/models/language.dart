@@ -1,7 +1,7 @@
 final List<LanguageModel> languages = [
   LanguageModel("English", "en"),
-  LanguageModel("Turkmen", "tm"),
-  LanguageModel("Russian", "ru"),
+  LanguageModel("Türkmen", "tm"),
+  LanguageModel("Pусский", "ru"),
 ];
 
 class LanguageModel {

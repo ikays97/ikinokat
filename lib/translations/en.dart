@@ -1,8 +1,11 @@
 final Map<String, String> en = {
-  'language': 'language',
-  'day': 'daytyssss',
-  'markets': 'markets',
+  'language': 'Language',
+  'dark': 'Dark Mode',
+  'markets': 'Markets',
   'product': 'Product',
+  'marka_yok': "Supplier doesn't have any brand",
+  'settings': 'Settings',
+  'select_language': 'Select Language',
 
   // add page
   "add_new_product": "New Product",

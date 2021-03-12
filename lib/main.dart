@@ -8,24 +8,29 @@ import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/translations/binding.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/main/main_page.dart';
 import 'translations/app_translation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => MainProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ThemeNotifier(lightTheme),
-        ),
-      ],
-      child: IKINOKATAPP(),
-    ),
-  );
+  SharedPreferences.getInstance().then((prefs) {
+    var darkModeOn = prefs.getBool('darkMode') ?? true;
+    return runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => MainProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+          ),
+        ],
+        child: IKINOKATAPP(),
+      ),
+    );
+  });
+
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
         SystemUiOverlayStyle(statusBarColor: Colors.transparent);

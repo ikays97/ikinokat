@@ -9,16 +9,16 @@ class MyCustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       color: Theme.of(context).accentColor,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0),
       ),
       onPressed: onTap,
       child: Text(
-        text,
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-        ),
+        text.toLowerCase(),
+        style: Theme.of(context).textTheme.bodyText1.copyWith(
+              color: Theme.of(context).primaryColor,
+            ),
       ),
     );
   }

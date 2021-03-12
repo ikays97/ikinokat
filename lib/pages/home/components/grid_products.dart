@@ -8,11 +8,8 @@ import 'package:ikinokat/widgets/my_cached_image.dart';
 class GridProducts extends StatelessWidget {
   final String label;
   final List<ProductItemModel> products;
-  const GridProducts({
-    Key key,
-    @required this.products,
-    @required this.label,
-  }) : super(key: key);
+  const GridProducts({Key key, @required this.products, this.label})
+      : super(key: key);
 
   //
   List<Widget> _buildGridItem(BuildContext context) {
@@ -31,7 +28,7 @@ class GridProducts extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.75),
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(5),
             ),
             child: Column(
@@ -57,6 +54,18 @@ class GridProducts extends StatelessWidget {
                         ),
                   ),
                 ),
+                if (products[i].price != null)
+                  Container(
+                    margin: EdgeInsets.only(left: 3),
+                    child: Text(
+                      // products[i].getName(code),
+                      products[i].price,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(color: Colors.redAccent),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -75,12 +84,11 @@ class GridProducts extends StatelessWidget {
     return Container(
       // height: _containerHeight,
       width: _screenWidth - 20,
-      color: Theme.of(context).cardColor,
-      padding: EdgeInsets.all(15),
+      // padding: EdgeInsets.all(15),
       // margin: EdgeInsets.only(top: 15, right: 15, bottom: 7.5, left: 15),
       child: Column(
         children: [
-          _buildLabel(context, label),
+          if (label != null) _buildLabel(context, label),
           GridView.count(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),

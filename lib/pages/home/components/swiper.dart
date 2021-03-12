@@ -21,7 +21,6 @@ class _HeadSwiperState extends State<HeadSwiper> {
   Widget build(BuildContext context) {
     return Container(
       height: 135.0 + 30,
-      color: Colors.white,
       child: Swiper(
         autoplay: true,
         autoplayDelay: 4000,

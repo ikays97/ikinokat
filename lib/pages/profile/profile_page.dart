@@ -8,6 +8,7 @@ import 'package:ikinokat/pages/profile/provider/language_controller.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'provider/theme_provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -17,7 +18,7 @@ class SettingsPage extends StatelessWidget {
       appBar: MyAppBar(
         leadingType: AppBarBackType.None,
         title: Text(
-          'Settings',
+          'settings'.tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -60,7 +61,7 @@ class SettingsPageContainer extends StatelessWidget {
               leading: Icon(Icons.wb_sunny_outlined),
               title: Row(
                 children: [
-                  Text('dark mode'),
+                  Text('dark'.tr),
                   Spacer(),
                   CupertinoSwitch(
                     value: themeNotifier.getTheme == darkTheme,
@@ -68,8 +69,8 @@ class SettingsPageContainer extends StatelessWidget {
                       (value)
                           ? themeNotifier.setTheme(darkTheme)
                           : themeNotifier.setTheme(lightTheme);
-                      // var prefs = await SharedPreferences.getInstance();
-                      // prefs.setBool('darkMode', value);
+                      var prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('darkMode', value);
                     },
                   ),
                 ],
@@ -95,7 +96,7 @@ class LanguageSelectPage extends StatelessWidget {
       appBar: MyAppBar(
         backgroundColor: Theme.of(context).cardColor,
         leadingType: AppBarBackType.Back,
-        title: Text('Select language'),
+        title: Text('select_language'.tr),
       ),
       body: Container(
         child: ListView(
@@ -112,6 +113,7 @@ class LanguageSelectPage extends StatelessWidget {
                       ? SvgPicture.asset(
                           "assets/icons/tick.svg",
                           height: 35,
+                          color: Theme.of(context).accentColor,
                         )
                       : null,
                 ),

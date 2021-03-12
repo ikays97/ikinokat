@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
       create: (_) => HomeProvider(),
       child: Scaffold(
         appBar: MyAppBar(
+          backgroundColor: Theme.of(context).canvasColor,
           leadingType: AppBarBackType.None,
         ),
         body: HomePageContainer(),
@@ -35,41 +36,53 @@ class _HomePageContainerState extends State<HomePageContainer>
     final state = Provider.of<HomeProvider>(context);
     return state.loading
         ? MyLoadingWidget()
-        : Container(
-            child: GestureDetector(
-              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-              child: SmartRefresher(
-                controller: state.refreshController,
-                onRefresh: () => state.initData(refresh: true),
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    // sliders
-                    SliverToBoxAdapter(
-                      child: HeadSwiper(
-                        bannerList: state.sliders,
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Container(
+              child: GestureDetector(
+                onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+                child: SmartRefresher(
+                  controller: state.refreshController,
+                  enablePullUp: true,
+                  onLoading: state.loadData,
+                  onRefresh: () => state.initData(refresh: true),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      // sliders
+                      SliverToBoxAdapter(
+                        child: HeadSwiper(
+                          bannerList: state.sliders,
+                        ),
                       ),
-                    ),
 
-                    // vip products
-                    SliverToBoxAdapter(
-                      child: GridProducts(
-                        label: 'vip_products',
-                        products: state.vipProducts,
+                      // vip products
+                      SliverToBoxAdapter(
+                        child: GridProducts(
+                          label: 'vip_products',
+                          products: state.vipProducts,
+                        ),
                       ),
-                    ),
 
-                    // trand products
-                    SliverToBoxAdapter(
-                      child: GridProducts(
-                        label: 'trand_products',
-                        products: state.trandProducts,
+                      // trand products
+                      SliverToBoxAdapter(
+                        child: GridProducts(
+                          label: 'trand_products',
+                          products: state.trandProducts,
+                        ),
                       ),
-                    ),
 
-                    /// all products by scrolling up
-                  ],
-                  // +
-                  // _hotCommodity(state.hotList),
+                      SliverToBoxAdapter(
+                        child: GridProducts(
+                          label: 'all_products',
+                          products: state.allProducts,
+                        ),
+                      ),
+
+                      /// all products by scrolling up
+                    ],
+                    // +
+                    // _hotCommodity(state.hotList),
+                  ),
                 ),
               ),
             ),

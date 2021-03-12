@@ -30,6 +30,7 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
                 ),
               ),
           centerTitle: centerTitle,
+          backgroundColor: backgroundColor,
           brightness: brightness ?? Brightness.dark,
           leading: leading ??
               (leadingType == AppBarBackType.None
@@ -58,10 +59,9 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
 
 class AppBarBack extends StatelessWidget {
   final AppBarBackType _backType;
-  final Color color;
   final WillPopCallback onWillPop;
 
-  AppBarBack(this._backType, {this.onWillPop, this.color});
+  AppBarBack(this._backType, {this.onWillPop});
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +74,13 @@ class AppBarBack extends StatelessWidget {
       child: _backType == AppBarBackType.Close
           ? Container(
               child: Icon(Icons.close,
-                  color: color ?? Color(0xFF222222), size: 24.0),
+                  color: Theme.of(context).accentColor, size: 24.0),
             )
           : Container(
-              margin: EdgeInsets.only(right: 15, left: 10),
+              margin: EdgeInsets.only(right: 15, left: 15),
               child: Image.asset(
                 'assets/icons/nav_back.png',
-                color: color,
+                color: Theme.of(context).accentColor,
               ),
             ),
     );

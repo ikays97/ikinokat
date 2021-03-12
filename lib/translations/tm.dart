@@ -41,8 +41,8 @@ final Map<String, String> tm = {
   "productd_min": "Az mukdarda:",
   "productd_desc": "Maglumat:",
   "productd_order": "Sarga",
-  "productd_all_products": "SATYJYNYÑ HARYTLARY",
-  "productd_similar_products": "MEŇZEŞ HARYTLAR",
+  "productd_all_products": "Ähli Harytlary",
+  "productd_similar_products": "Meňzeş Harytlar",
 
   // order modal
   "productd_order_title": "Sargyt etmek",
