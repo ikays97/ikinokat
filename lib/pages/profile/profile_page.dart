@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/models/language.dart';
+import 'package:ikinokat/pages/login/login_page.dart';
 import 'package:ikinokat/pages/profile/provider/language_controller.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
@@ -39,7 +40,7 @@ class SettingsPageContainer extends StatelessWidget {
       child: ListView(
         shrinkWrap: true,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               MyNavigator.push(LanguageSelectPage());
             },
@@ -78,10 +79,17 @@ class SettingsPageContainer extends StatelessWidget {
               ),
             ),
           ),
-          // RaisedButton(
-          //   onPressed: () => Get.toNamed("/details"),
-          //   child: Text("Go To Next Page"),
-          // )
+          InkWell(
+            onTap: () {
+              MyNavigator.push(LoginPage());
+            },
+            child: Card(
+              child: ListTile(
+                leading: Icon(Icons.login_outlined),
+                title: Text('Login'),
+              ),
+            ),
+          ),
         ],
       ),
     );

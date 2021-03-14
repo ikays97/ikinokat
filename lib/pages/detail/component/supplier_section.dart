@@ -54,8 +54,9 @@ class SuppierPart extends StatelessWidget {
   _buildOrderForm(BuildContext context, ProductDetailProvider state) {
     return showDialog(
       context: context,
-      child: CustomOrderDialog(state: state),
-    );
+      builder: (_) {
+      return CustomOrderDialog(state: state);
+    });
   }
 
   @override

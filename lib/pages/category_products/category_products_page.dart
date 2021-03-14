@@ -84,8 +84,6 @@ class _CategoryProductsPageContainerState
 
                       /// all products by scrolling up
                     ],
-                    // +
-                    // _hotCommodity(state.hotList),
                   ),
                 ),
               ),

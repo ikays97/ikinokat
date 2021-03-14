@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const SERVER_API_URL = "http://lomaysowda.com.tm/api/";
+const SERVER_API_URL = "http://ikinokat.com/api/";
 
 class RequestUtil {
   static RequestUtil _instance = RequestUtil._internal();
@@ -104,16 +104,21 @@ class RequestUtil {
 
   ///  post operating
   Future post(String path, {dynamic params, Options options}) async {
-    Options requestOptions = options ?? Options();
+    try {
+      Options requestOptions = options ?? Options();
 
-    /// The following three lines of code are the
-    /// operation of obtaining the token and then merging it into the header
-    // Map<String, dynamic> _authorization = getAuthorizationHeader();
-    // if (_authorization != null) {
-    //   requestOptions = requestOptions.merge(headers: _authorization);
-    // }
-    var response = await dio.post(path, data: params, options: requestOptions);
-    return response.data;
+      /// The following three lines of code are the
+      /// operation of obtaining the token and then merging it into the header
+      // Map<String, dynamic> _authorization = getAuthorizationHeader();
+      // if (_authorization != null) {
+      //   requestOptions = requestOptions.merge(headers: _authorization);
+      // }
+      var response =
+          await dio.post(path, data: params, options: requestOptions);
+      return response.data;
+    } on DioError catch (e) {
+      return {'error': e};
+    }
   }
 
   ///  put operating

@@ -20,7 +20,7 @@ final darkTheme = ThemeData(
   brightness: Brightness.dark,
   backgroundColor: const Color(0xFF212121),
   accentColor: Colors.white,
-  accentIconTheme: IconThemeData(color: Colors.black),
+  accentIconTheme: IconThemeData(color: Colors.red),
   dividerColor: Colors.black12,
 );
 
@@ -30,6 +30,17 @@ final lightTheme = ThemeData(
   brightness: Brightness.light,
   backgroundColor: const Color(0xFFE5E5E5),
   accentColor: Colors.black,
-  accentIconTheme: IconThemeData(color: Colors.white),
+  accentIconTheme: IconThemeData(color: Colors.yellow),
   dividerColor: Colors.white54,
 );
+
+// status bar style
+
+// SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//     systemNavigationBarColor: Colors.blue, // navigation bar color
+//     statusBarColor: Colors.pink, // status bar color
+//     statusBarBrightness: Brightness.dark,//status bar brigtness
+//     statusBarIconBrightness:Brightness.dark , //status barIcon Brightness
+//     systemNavigationBarDividerColor: Colors.greenAccent,//Navigation bar divider color
+//     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
+//   ));

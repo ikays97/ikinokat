@@ -108,12 +108,17 @@ class GridProducts extends StatelessWidget {
   }
 
   Widget _buildLabel(BuildContext context, String title) {
-    final _screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      height: _screenWidth * 0.12,
-      child: Text(
-        label.tr,
-        style: Theme.of(context).textTheme.headline5,
+      margin: EdgeInsets.only(bottom: 10.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              label.tr,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ),
+        ],
       ),
     );
   }

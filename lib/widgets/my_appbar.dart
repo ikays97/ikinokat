@@ -29,11 +29,11 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
                 child: Image.asset(
                   "assets/icons/amazon.png",
                   width: 95,
+                  color: Theme.of(context).accentColor,
                 ),
               ),
           centerTitle: centerTitle,
           backgroundColor: backgroundColor,
-          brightness: brightness ?? Brightness.dark,
           leading: leading ??
               (leadingType == AppBarBackType.None
                   ? null
@@ -51,7 +51,7 @@ class MyAppBar extends AppBar implements PreferredSizeWidget {
                 height: 45,
                 child: SvgPicture.asset(
                   "assets/icons/search.svg",
-                  color: Colors.white,
+                  color: Theme.of(context).accentColor,
                 ),
               ),
             ),
