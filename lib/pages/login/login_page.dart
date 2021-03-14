@@ -8,6 +8,7 @@ import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_custom_button.dart';
 import 'package:ikinokat/widgets/my_textformfield.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -43,9 +44,11 @@ class LoginPageContainer extends StatelessWidget {
       };
       await state.login(data: data);
       if (state.isLoggedIn) {
-        MyNavigator.pushAndRemove(SettingsPage());
+        var prefs = await SharedPreferences.getInstance();
+        prefs.setBool('isLogged', true);
+        MyNavigator.pushAndRemove(ProfilePage());
       } else {
-        print('tazeden synanh (login).');
+        print('tazeden synansh (login).');
       }
     };
     return Container(

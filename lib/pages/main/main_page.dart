@@ -57,7 +57,7 @@ class _MainPageState extends State<MainPage>
           HomePage(),
           CategoryPage(),
           TestPage2(),
-          SettingsPage(),
+          ProfilePage(),
         ],
       ),
     );
