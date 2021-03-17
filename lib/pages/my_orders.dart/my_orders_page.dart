@@ -1,37 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ikinokat/pages/home/components/grid_products.dart';
-import 'package:ikinokat/pages/my_products.dart/provider/getproducts_provider.dart';
+import 'package:ikinokat/pages/my_orders.dart/components/grid_order.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_custom_footer.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MyProductsPage extends StatelessWidget {
-  const MyProductsPage({Key key}) : super(key: key);
+import 'provider.dart/getorders_provider.dart';
+
+class MyOrdersPage extends StatelessWidget {
+  const MyOrdersPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => GetProductsProvider(),
+      create: (_) => GetOrdersProvider(),
       child: Scaffold(
         appBar: MyAppBar(
           context: context,
           leadingType: AppBarBackType.Back,
-          title: Text('My Products'),
+          title: Text('My Orders'),
         ),
         body: SafeArea(
-          child: MyProductsPageContainer(),
+          child: MyOrdersPageContainer(),
         ),
       ),
     );
   }
 }
 
-class MyProductsPageContainer extends StatelessWidget {
+class MyOrdersPageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<GetProductsProvider>(context);
+    final state = Provider.of<GetOrdersProvider>(context);
     return state.loading
         ? MyLoadingWidget()
         : Padding(
@@ -42,19 +43,18 @@ class MyProductsPageContainer extends StatelessWidget {
                 child: SmartRefresher(
                   controller: state.refreshController,
                   enablePullUp: true,
-                  onRefresh: state.getUserProducts,
+                  onRefresh: state.getUserOrders,
                   onLoading: state.loadMoreProducts,
                   footer: MyCustomFooter(),
                   child: CustomScrollView(
                     slivers: <Widget>[
                       SliverToBoxAdapter(
-                        child: GridProducts(
-                          label: 'My Products',
-                          products: state.userProducts,
+                        child: GridOrders(
+                          orders: state.userOrders,
                         ),
                       ),
 
-                      /// all products by scrolling up
+                      /// all brands by scrolling up
                     ],
                   ),
                 ),

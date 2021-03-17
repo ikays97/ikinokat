@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/config/custom_theme.dart';
+import 'package:ikinokat/pages/my_brands.dart/my_brands_page.dart';
+import 'package:ikinokat/pages/my_orders.dart/my_orders_page.dart';
+import 'package:ikinokat/pages/my_products.dart/my_products.dart';
 import 'package:ikinokat/pages/profile/components/select_language.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/utils/navigator.dart';
@@ -11,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'list_tile_item.dart';
 
-class BuilFunction extends StatelessWidget {
+class ProfileTileList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
@@ -40,19 +43,25 @@ class BuilFunction extends StatelessWidget {
                   iconData: 'assets/icons/product.svg',
                   title: 'My Products',
                   count: 37,
-                  onTap: () {},
+                  onTap: () {
+                    MyNavigator.push(MyProductsPage());
+                  },
                 ),
                 ListTileItem(
                   iconData: 'assets/icons/star.svg',
                   title: 'My Brands',
                   count: 5,
-                  onTap: () {},
+                  onTap: () {
+                    MyNavigator.push(MyBrandsPage());
+                  },
                 ),
                 ListTileItem(
                   iconData: 'assets/icons/orders.svg',
                   title: 'My Orders',
                   count: 15,
-                  onTap: () {},
+                  onTap: () {
+                    MyNavigator.push(MyOrdersPage());
+                  },
                 ),
               ],
             ),
@@ -73,7 +82,7 @@ class BuilFunction extends StatelessWidget {
                     ListTileItem(
                       iconData: 'assets/icons/language.svg',
                       title: 'Language',
-                      count: 37,
+                      count: 3,
                       onTap: () {
                         MyNavigator.push(LanguageSelectPage());
                       },

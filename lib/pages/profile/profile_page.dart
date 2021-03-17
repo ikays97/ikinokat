@@ -54,7 +54,7 @@ class _ProfilePageContainerState extends State<ProfilePageContainer> {
                 LoggedProfileTop(
                   current_context: context,
                 ),
-                BuilFunction(),
+                ProfileTileList(),
               ],
             ),
           ),

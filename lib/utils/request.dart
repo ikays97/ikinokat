@@ -71,7 +71,9 @@ class RequestUtil {
    */
   getAuthorizationHeader() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
+    String token = prefs.getString('token');
+    String bearer = "Bearer $token";
+    return bearer;
   }
 
   /// get operating
@@ -79,18 +81,20 @@ class RequestUtil {
     String path, {
     dynamic params,
     Options options,
-    bool auth,
   }) async {
     try {
       Options requestOptions = options ?? Options();
 
-      /// The following three lines of code are the
+      /// The following lines of code are the
       /// operation of obtaining the token and then merging it into the header
-      if (auth == true){
-        Map<String, dynamic> _authorization = {"token": getAuthorizationHeader()};
-        if (_authorization != null) {
-          requestOptions = requestOptions.merge(headers: _authorization);
-        }
+
+      // get token
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      // options header
+      Map<String, dynamic> headers = {"Authorization": "Bearer $token"};
+      if (token != null) {
+        requestOptions = requestOptions.merge(headers: headers);
       }
 
       var response = await dio.get(
@@ -112,8 +116,7 @@ class RequestUtil {
 
       /// The following three lines of code are the
       /// operation of obtaining the token and then merging it into the header
-      
-      
+
       var response =
           await dio.post(path, data: params, options: requestOptions);
       return response.data;
