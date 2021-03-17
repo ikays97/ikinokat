@@ -1,20 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/config/validators.dart';
-import 'package:ikinokat/pages/login/provider.dart/login_provider.dart';
 import 'package:ikinokat/pages/profile/profile_page.dart';
+import 'package:ikinokat/pages/profile/provider/user_provider.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_custom_button.dart';
 import 'package:ikinokat/widgets/my_textformfield.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => LoginProvider(),
+      create: (_) => UserProvider(),
       child: Scaffold(
         appBar: MyAppBar(
           context: context,
@@ -35,20 +34,24 @@ class LoginPageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<LoginProvider>(context);
+    final state = Provider.of<UserProvider>(context);
     // login function
     var doLogin = () async {
-      Map<String, String> data = {
-        'email': _usernameController.text,
-        'password': _passwordController.text,
-      };
-      await state.login(data: data);
-      if (state.isLoggedIn) {
-        var prefs = await SharedPreferences.getInstance();
-        prefs.setBool('isLogged', true);
-        MyNavigator.pushAndRemove(ProfilePage());
+      if (_formKey.currentState.validate()) {
+        Map<String, String> data = {
+          'email': _usernameController.text,
+          'password': _passwordController.text,
+        };
+        await state.login(data: data);
+        if (state.isLoggedIn) {
+          Future.delayed(Duration(milliseconds: 250), () {
+            MyNavigator.pushAndRemove(ProfilePage());
+          });
+        } else {
+          print('tazeden synansh (login).');
+        }
       } else {
-        print('tazeden synansh (login).');
+        print('form validation failed');
       }
     };
     return Container(

@@ -28,7 +28,7 @@ final lightTheme = ThemeData(
   primarySwatch: Colors.grey,
   primaryColor: Colors.white,
   brightness: Brightness.light,
-  backgroundColor: const Color(0xFFE5E5E5),
+  backgroundColor: const Color(0xFFD0E9FA),
   accentColor: Colors.black,
   accentIconTheme: IconThemeData(color: Colors.yellow),
   dividerColor: Colors.white54,

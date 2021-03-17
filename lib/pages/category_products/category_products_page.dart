@@ -18,6 +18,7 @@ class CategoryProductsPage extends StatelessWidget {
       create: (_) => CategoryProductsProvider(categoryId: categoryID),
       child: Scaffold(
         appBar: MyAppBar(
+          context: context,
           backgroundColor: Theme.of(context).canvasColor,
           leadingType: AppBarBackType.None,
         ),

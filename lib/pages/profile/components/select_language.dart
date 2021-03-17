@@ -13,6 +13,7 @@ class LanguageSelectPage extends StatelessWidget {
 
     return Scaffold(
       appBar: MyAppBar(
+        context: context,
         backgroundColor: Theme.of(context).cardColor,
         leadingType: AppBarBackType.Back,
         title: Text('select_language'.tr),

@@ -27,6 +27,7 @@ class MyTextFormField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       child: CupertinoTextField(
+        autocorrect: false,
         controller: controller,
         obscureText: obscureText,
         maxLines: maxLines,

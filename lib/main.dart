@@ -6,6 +6,7 @@ import 'package:get/state_manager.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
+import 'package:ikinokat/pages/profile/provider/user_provider.dart';
 import 'package:ikinokat/translations/binding.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,23 +15,29 @@ import 'translations/app_translation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.getInstance().then((prefs) {
-    var darkModeOn = prefs.getBool('darkMode') ?? true;
-    var selectedLang = prefs.getString('language') ?? 'ru';
-    return runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => MainProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-          ),
-        ],
-        child: IKINOKATAPP(lang: selectedLang),
-      ),
-    );
-  });
+  SharedPreferences.getInstance().then(
+    (prefs) {
+      var darkModeOn = prefs.getBool('darkMode') ?? true;
+      var selectedLang = prefs.getString('language') ?? 'ru';
+      var isLogin = prefs.getBool('loggedin');
+      return runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (_) => MainProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => UserProvider(isLoggedIn: isLogin ?? false),
+            ),
+          ],
+          child: IKINOKATAPP(lang: selectedLang),
+        ),
+      );
+    },
+  );
 
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =

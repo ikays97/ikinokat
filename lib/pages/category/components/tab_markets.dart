@@ -27,13 +27,11 @@ class _MarketsPageState extends State<MarketsPage> {
                       title: Text(province.name),
                       children: province.cities.list.map<Widget>((city) {
                         return ExpansionTile(
-                          childrenPadding: EdgeInsets.only(left: 10),
+                          childrenPadding: EdgeInsets.only(left: 15),
                           title: Text(city.name),
                           children: city.markets.list.map((market) {
-                            return Card(
-                              child: ListTile(
-                                title: Text(market.name),
-                              ),
+                            return ListTile(
+                              title: Text(market.name),
                             );
                           }).toList(),
                         );
