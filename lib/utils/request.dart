@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -72,7 +71,7 @@ class RequestUtil {
    */
   getAuthorizationHeader() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('token');
+    return prefs.getString('token');
   }
 
   /// get operating
@@ -80,16 +79,20 @@ class RequestUtil {
     String path, {
     dynamic params,
     Options options,
+    bool auth,
   }) async {
     try {
       Options requestOptions = options ?? Options();
 
       /// The following three lines of code are the
       /// operation of obtaining the token and then merging it into the header
-      // Map<String, dynamic> _authorization = {"token": getAuthorizationHeader()};
-      // if (_authorization != null) {
-      //   requestOptions = requestOptions.merge(headers: _authorization);
-      // }
+      if (auth == true){
+        Map<String, dynamic> _authorization = {"token": getAuthorizationHeader()};
+        if (_authorization != null) {
+          requestOptions = requestOptions.merge(headers: _authorization);
+        }
+      }
+
       var response = await dio.get(
         path,
         queryParameters: params,
@@ -109,10 +112,8 @@ class RequestUtil {
 
       /// The following three lines of code are the
       /// operation of obtaining the token and then merging it into the header
-      // Map<String, dynamic> _authorization = getAuthorizationHeader();
-      // if (_authorization != null) {
-      //   requestOptions = requestOptions.merge(headers: _authorization);
-      // }
+      
+      
       var response =
           await dio.post(path, data: params, options: requestOptions);
       return response.data;

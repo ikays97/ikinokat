@@ -54,7 +54,7 @@ class CustomDialog extends StatefulWidget {
 class _CustomDialogState extends State<CustomDialog> {
   _confirmDialog() {
     /// Judge based on the returned index
-    Navigator.of(context).pop(1);
+    // Navigator.of(context).pop(1);
     Future.delayed(Duration(milliseconds: 250), () {
       if (widget.confirmCallback != null) {
         widget.confirmCallback();
@@ -64,7 +64,7 @@ class _CustomDialogState extends State<CustomDialog> {
 
   _dismissDialog() {
     /// Judge based on the returned index
-    Navigator.of(context).pop(0);
+    // Navigator.of(context).pop(0);
     Future.delayed(Duration(milliseconds: 250), () {
       if (widget.dismissCallback != null) {
         widget.dismissCallback();
@@ -85,7 +85,9 @@ class _CustomDialogState extends State<CustomDialog> {
           height: 30,
           child: Text(
             widget.title == null ? '' : widget.title,
-            style: widget.titleStyle,
+            style: Theme.of(context).textTheme.headline6.copyWith(
+                  color: Theme.of(context).accentColor,
+                ),
           ),
         ),
         // Intermediate content

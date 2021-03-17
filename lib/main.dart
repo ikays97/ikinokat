@@ -19,18 +19,19 @@ void main() async {
     (prefs) {
       var darkModeOn = prefs.getBool('darkMode') ?? true;
       var selectedLang = prefs.getString('language') ?? 'ru';
-      var isLogin = prefs.getBool('loggedin');
+      var isLogin = prefs.getString('token') == null ? false : true;
+      UserProvider userProvider = UserProvider(user: isLogin);
+      print('baslangyc: ');
+      print(userProvider.getUser);
       return runApp(
         MultiProvider(
           providers: [
+            ChangeNotifierProvider<UserProvider>.value(value: userProvider),
             ChangeNotifierProvider(
               create: (_) => MainProvider(),
             ),
             ChangeNotifierProvider(
               create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-            ),
-            ChangeNotifierProvider(
-              create: (_) => UserProvider(isLoggedIn: isLogin ?? false),
             ),
           ],
           child: IKINOKATAPP(lang: selectedLang),
