@@ -22,6 +22,7 @@ final darkTheme = ThemeData(
   accentColor: Colors.white,
   accentIconTheme: IconThemeData(color: Colors.red),
   dividerColor: Colors.black12,
+  fontFamily: 'Montserrat',
 );
 
 final lightTheme = ThemeData(
@@ -32,6 +33,7 @@ final lightTheme = ThemeData(
   accentColor: Colors.black,
   accentIconTheme: IconThemeData(color: Colors.yellow),
   dividerColor: Colors.white54,
+  fontFamily: 'Montserrat',
 );
 
 // status bar style

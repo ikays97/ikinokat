@@ -4,12 +4,11 @@ import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 import 'package:ikinokat/pages/category/category_page.dart';
 import 'package:ikinokat/pages/home/home_page.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
+import 'package:ikinokat/pages/my_products.dart/pages/product_add_page.dart';
 import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/utils/navigator.dart';
-import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_bottom_navbar.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -56,7 +55,7 @@ class _MainPageState extends State<MainPage>
         children: [
           HomePage(),
           CategoryPage(),
-          TestPage2(),
+          ProductAddPage(),
           ProfilePage(),
         ],
       ),
@@ -65,32 +64,4 @@ class _MainPageState extends State<MainPage>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class TestPage2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(
-        context: context,
-        leadingType: AppBarBackType.None,
-        title: Text(
-          "search_bar_label".tr,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-        ),
-      ),
-      body: Container(
-        color: Theme.of(context).cardColor,
-        child: Center(
-          child: Text(
-            "search_bar_label".tr,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ),
-      ),
-    );
-  }
 }

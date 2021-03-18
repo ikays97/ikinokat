@@ -5,7 +5,13 @@ class BrandModel {
   int status;
   int preview;
 
-  BrandModel({this.id, this.name, this.image, this.status, this.preview});
+  BrandModel({
+    this.id,
+    this.name,
+    this.image,
+    this.status,
+    this.preview,
+  });
 
   BrandModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],

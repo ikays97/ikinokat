@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/my_brands.dart/my_brands_page.dart';
 import 'package:ikinokat/pages/my_orders.dart/my_orders_page.dart';
-import 'package:ikinokat/pages/my_products.dart/my_products.dart';
+import 'package:ikinokat/pages/my_products.dart/pages/products_page.dart';
 import 'package:ikinokat/pages/profile/components/select_language.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/utils/navigator.dart';

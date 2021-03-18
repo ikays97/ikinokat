@@ -16,9 +16,9 @@ const List<Map<String, String>> _tabBarData = [
     "selectedImage": "assets/icons/category.svg",
   },
   {
-    "title": "Search",
-    "image": "assets/icons/search.svg",
-    "selectedImage": "assets/icons/search.svg",
+    "title": "Add Product",
+    "image": "assets/icons/add5.svg",
+    "selectedImage": "assets/icons/add5.svg",
   },
   {
     "title": "Settings",

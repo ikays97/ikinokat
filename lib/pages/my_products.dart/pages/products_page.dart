@@ -49,7 +49,7 @@ class MyProductsPageContainer extends StatelessWidget {
                     slivers: <Widget>[
                       SliverToBoxAdapter(
                         child: GridProducts(
-                          label: 'My Products',
+                          auth: true,
                           products: state.userProducts,
                         ),
                       ),

@@ -11,6 +11,7 @@ class MyTextFormField extends StatelessWidget {
   final int maxLines;
   final int minLines;
   final bool obscureText;
+  final String initialValue;
 
   const MyTextFormField({
     Key key,
@@ -20,6 +21,7 @@ class MyTextFormField extends StatelessWidget {
     this.keyboardType,
     this.maxLines,
     this.minLines,
+    this.initialValue,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -56,6 +58,7 @@ class MyTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
         ),
+        initialValue: initialValue,
       );
     }
   }

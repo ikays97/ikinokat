@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/config/validators.dart';
-import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
