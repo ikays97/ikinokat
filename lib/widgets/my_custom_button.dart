@@ -11,18 +11,27 @@ class MyCustomButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      color: Theme.of(context).accentColor,
-      padding: EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      onPressed: onTap,
-      child: Text(
-        text.toLowerCase(),
-        style: Theme.of(context).textTheme.bodyText1.copyWith(
-              color: Theme.of(context).primaryColor,
+    return InkWell(
+      onTap: onTap,
+      splashColor: Theme.of(context).backgroundColor,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.blue[400],
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Center(
+          child: Text(
+            text.toLowerCase(),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white.withOpacity(0.9),
+              fontWeight: FontWeight.w600,
             ),
+          ),
+        ),
       ),
     );
   }

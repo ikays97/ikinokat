@@ -7,21 +7,21 @@ class MyTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final Function validator;
   final String hintText;
+  final String labelText;
   final TextInputType keyboardType;
   final int maxLines;
   final int minLines;
   final bool obscureText;
-  final String initialValue;
 
   const MyTextFormField({
     Key key,
     @required this.controller,
     @required this.validator,
+    this.labelText,
     this.hintText,
     this.keyboardType,
     this.maxLines,
     this.minLines,
-    this.initialValue,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -47,18 +47,56 @@ class MyTextFormField extends StatelessWidget {
         ),
       );
     } else if (Platform.isAndroid) {
-      return TextFormField(
-        controller: controller,
-        obscureText: obscureText,
-        maxLines: maxLines,
-        minLines: minLines,
-        style: Theme.of(context).textTheme.bodyText1.copyWith(
-              fontSize: 16,
+      return FormField<String>(
+        builder: (FormFieldState<String> state) {
+          return TextFormField(
+            controller: controller,
+            obscureText: obscureText,
+            maxLines: maxLines,
+            minLines: minLines,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontSize: 16,
+                ),
+            decoration: InputDecoration(
+              labelText: labelText,
+              hintText: hintText,
+              contentPadding: EdgeInsets.fromLTRB(15, 0, 10, 0),
+              labelStyle: TextStyle(
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .color
+                    .withOpacity(0.7),
+                fontSize: 14,
+              ),
+              hintStyle: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .color
+                    .withOpacity(0.4),
+              ),
+              errorStyle: TextStyle(
+                color: Colors.redAccent,
+                fontSize: 12.0,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).accentColor.withOpacity(0.7),
+                  width: 2.0,
+                ),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
             ),
-        decoration: InputDecoration(
-          hintText: hintText,
-        ),
-        initialValue: initialValue,
+            strutStyle: StrutStyle(
+              fontSize: 25,
+            ),
+          );
+        },
       );
     }
   }
@@ -66,7 +104,9 @@ class MyTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(
+        bottom: 12,
+      ),
       child: checkPlatform(context),
     );
   }

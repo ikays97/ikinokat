@@ -9,7 +9,6 @@ class ProductsGridAPI {
     Options options,
   }) async {
     var response = await RequestUtil().get(route, params: params);
-    print(response);
     return ProductListModel.fromJson(response['data']);
   }
 

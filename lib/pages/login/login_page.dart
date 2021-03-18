@@ -47,13 +47,13 @@ class _LoginPageContainerState extends State<LoginPageContainer> {
         };
         final state = Provider.of<UserProvider>(context, listen: false);
         await state.login(data: data);
-        if (state.getUser) {
-          Future.delayed(Duration(milliseconds: 250), () {
-            MyNavigator.pop();
-          });
-        } else {
-          print('tazeden synansh (login).');
-        }
+        // if (state.getUser) {
+        //   Future.delayed(Duration(milliseconds: 250), () {
+        //     MyNavigator.pop();
+        //   });
+        // } else {
+        //   print('tazeden synansh (login).');
+        // }
       } else {
         print('form validation failed');
       }

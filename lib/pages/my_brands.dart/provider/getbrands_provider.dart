@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:ikinokat/models/brand.dart';
-import 'package:ikinokat/models/product.dart';
 import 'package:ikinokat/services/brand_service.dart';
-import 'package:ikinokat/services/products_service.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class GetBrandsProvider with ChangeNotifier {

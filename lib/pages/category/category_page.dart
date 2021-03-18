@@ -30,14 +30,8 @@ class CategoryPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            ChangeNotifierProvider(
-              create: (_) => MarketsProvider(),
-              child: MarketsPage(),
-            ),
-            ChangeNotifierProvider(
-              create: (_) => CategoryProvider(),
-              child: CategoryPageContainer(),
-            ),
+            MarketsPage(),
+            CategoryPageContainer(),
           ],
         ),
       ),

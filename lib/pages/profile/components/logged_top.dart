@@ -83,12 +83,13 @@ class LoggedProfileTop extends StatelessWidget {
                             outsideDismiss: true,
                             confirmCallback: () async {
                               UserProvider state = Provider.of<UserProvider>(
-                                  context,
-                                  listen: false);
-                              MyNavigator.pushAndRemove(ProfilePage());
+                                context,
+                                listen: false,
+                              );
+                              await state.logout();
                             },
                             dismissCallback: () {
-                              MyNavigator.pop();
+                              // MyNavigator.pop();
                             },
                           );
                         });

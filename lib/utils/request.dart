@@ -116,6 +116,14 @@ class RequestUtil {
 
       /// The following three lines of code are the
       /// operation of obtaining the token and then merging it into the header
+      /// get token
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      // options header
+      Map<String, dynamic> headers = {"Authorization": "Bearer $token"};
+      if (token != null) {
+        requestOptions = requestOptions.merge(headers: headers);
+      }
 
       var response =
           await dio.post(path, data: params, options: requestOptions);

@@ -12,17 +12,14 @@ class MyBrandsPage extends StatelessWidget {
   const MyBrandsPage({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => GetBrandsProvider(),
-      child: Scaffold(
-        appBar: MyAppBar(
-          context: context,
-          leadingType: AppBarBackType.Back,
-          title: Text('My Brands'),
-        ),
-        body: SafeArea(
-          child: MyBrandsPageContainer(),
-        ),
+    return Scaffold(
+      appBar: MyAppBar(
+        context: context,
+        leadingType: AppBarBackType.Back,
+        title: Text('My Brands'),
+      ),
+      body: SafeArea(
+        child: MyBrandsPageContainer(),
       ),
     );
   }

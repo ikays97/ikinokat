@@ -5,12 +5,16 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
+import 'package:ikinokat/pages/my_products.dart/provider/addproduct_provider.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
 import 'package:ikinokat/translations/binding.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'pages/category/provider/category_provider.dart';
+import 'pages/category/provider/markets_provider.dart';
 import 'pages/main/main_page.dart';
+import 'pages/my_brands.dart/provider/getbrands_provider.dart';
 import 'translations/app_translation.dart';
 
 void main() async {
@@ -26,12 +30,26 @@ void main() async {
       return runApp(
         MultiProvider(
           providers: [
-            ChangeNotifierProvider<UserProvider>.value(value: userProvider),
+            ChangeNotifierProvider<UserProvider>.value(
+              value: userProvider,
+            ),
             ChangeNotifierProvider(
               create: (_) => MainProvider(),
             ),
             ChangeNotifierProvider(
               create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => GetBrandsProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => AddProductProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => MarketsProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => CategoryProvider(),
             ),
           ],
           child: IKINOKATAPP(lang: selectedLang),
