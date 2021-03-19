@@ -1,23 +1,25 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'package:get/get.dart' as GetLocale;
-import 'package:http_parser/http_parser.dart';
 import 'package:ikinokat/config/validators.dart';
 import 'package:ikinokat/pages/category/provider/category_provider.dart';
 import 'package:ikinokat/pages/login/login_page.dart';
 import 'package:ikinokat/pages/my_brands.dart/provider/getbrands_provider.dart';
 import 'package:ikinokat/pages/my_products.dart/components.dart/upload_image.dart';
+import 'package:ikinokat/pages/my_products.dart/pages/products_page.dart';
 import 'package:ikinokat/pages/my_products.dart/provider/addproduct_provider.dart';
+import 'package:ikinokat/pages/my_products.dart/provider/image_provider.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
+import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_custom_button.dart';
 import 'package:ikinokat/widgets/my_dropdown.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:ikinokat/widgets/my_textformfield.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class ProductAddPage extends StatelessWidget {
@@ -47,20 +49,14 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
   final TextEditingController _keywordController = TextEditingController();
   final TextEditingController _descripController = TextEditingController();
   String _category, _brand, _unit;
-
-  // upload image variables
-  List<Asset> images = [];
-  List files = [];
-  String _error;
-  List<Asset> resultList = [];
-  List<MultipartFile> multipartImageList = [];
+  List<File> _images = [];
 
   @override
   Widget build(BuildContext context) {
     /// states
-    final state = Provider.of<AddProductProvider>(context);
     final cat_state = Provider.of<CategoryProvider>(context);
     final brand_state = Provider.of<GetBrandsProvider>(context);
+    final imagestate = Provider.of<MyImageProvider>(context);
     final langCode = GetLocale.Get.locale.languageCode;
 
     /// dropdown lists
@@ -74,50 +70,52 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
       final form = _formKey.currentState;
       if (form.validate()) {
         form.save();
-        for (Asset asset in images) {
-          ByteData byteData = await asset.getByteData();
-          List<int> imageData = byteData.buffer.asUint8List();
-          var imagePath =
-              await FlutterAbsolutePath.getAbsolutePath(asset.identifier);
-          MultipartFile multipartFile = MultipartFile.fromBytes(
-            imageData,
-            filename: imagePath,
-            contentType: MediaType("image", "jpg"),
-          );
-          multipartImageList.add(multipartFile);
-          FormData formData = FormData.fromMap({
-            'name_tm': _nameController.text,
-            'cat_id': categories.indexOf(_category),
-            'brand_id': brands.indexOf(_brand),
-            'unit_id': units.indexOf(_unit),
-            "images": multipartImageList,
-            // '': _priceController.text,
-            // '': _quantityController.text,
-            // '': _keywordController.text,
-            // '': _descripController.text,
-          });
-          AddProductProvider _provider =
-              Provider.of<AddProductProvider>(context, listen: false);
-          await _provider.addUserProduct(formData);
-          // try {
-          //   Dio dio = Dio();
-          //   var response = await dio
-          //       .post('http://lomaysowda.com.tm/api/store/product', data: data);
-          //   var body = jsonDecode(response.data);
-          //   print(body);
-          //   if (body['msg'] == "Success!") {
-          //     print('posted successfully!');
-          //   } else {
-          //     print(body['msg']);
-          //   }
-          // } catch (e) {
-          //   return e.message;
-          // }
+
+        Map<String, dynamic> data = {
+          'name_tm': _nameController.text,
+          'cat_id': categories.indexOf(_category) + 1,
+          'brand_id': brands.indexOf(_brand) + 1,
+          'unit_id': units.indexOf(_unit) + 1,
+        };
+
+        if (imagestate.img1 != null) {
+          print("Image 1: ${imagestate.img1.path}");
+          _images.add(File(imagestate.img1.path));
+        }
+        if (imagestate.img2 != null) {
+          print("Image 2: ${imagestate.img2.path}");
+          _images.add(File(imagestate.img2.path));
+        }
+        if (imagestate.img3 != null) {
+          print("Image 3: ${imagestate.img3.path}");
+          _images.add(File(imagestate.img3.path));
+        }
+
+        Map<String, List<MultipartFile>> fileMap = {"images": []};
+        for (File file in _images) {
+          String filename = basename(file.path);
+          fileMap['images'].add(MultipartFile(
+            file.openRead(),
+            await file.length(),
+            filename: filename,
+          ));
+        }
+
+        data.addAll(fileMap);
+        var formData = FormData.fromMap(data);
+        AddProductProvider state =
+            Provider.of<AddProductProvider>(context, listen: false);
+        await state.addUserProduct(formData);
+        if (state.isAdded) {
+          MyNavigator.push(MyProductsPage());
+        } else {
+          print('haryt goshulmady, product_add_page:111');
         }
       } else {
         print('form validation failed');
       }
     };
+
     return cat_state.loading
         ? MyLoadingWidget()
         : Container(
@@ -131,7 +129,13 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
                   bottom: 8,
                 ),
                 children: [
-                  buildImageView(),
+                  Row(
+                    children: [
+                      UploadSection(number: 1),
+                      UploadSection(number: 2),
+                      UploadSection(number: 3),
+                    ],
+                  ),
                   MyTextFormField(
                     controller: _nameController,
                     validator: validateName,
@@ -212,62 +216,164 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
             ),
           );
   }
-
-  Widget buildImageView() {
-    if (images != null && images.isNotEmpty) {
-      return Container(
-        height: 300,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          children: List.generate(images.length, (index) {
-            Asset asset = images[index];
-            print(asset.getByteData(quality: 100));
-            return Padding(
-              padding: EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                child: AssetThumb(
-                  asset: asset,
-                  width: 200,
-                  height: 200,
-                ),
-              ),
-            );
-          }),
-        ),
-      );
-    } else {
-      return UploadSection(
-        onTap: loadAssets,
-      );
-    }
-  }
-
-  Future<void> loadAssets() async {
-    String error = "No error detected";
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 4,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
-      );
-    } on Exception catch (e) {
-      error = e.toString();
-    }
-
-    if (!mounted) return;
-    setState(() {
-      images = resultList;
-      _error = error;
-    });
-  }
-
-  getImageFileFromAsset(String path) async {
-    final file = File(path);
-    return file;
-  }
 }
+
+// Widget buildImageView(File image) {
+//     final retrieveError =
+//         _retrieveDataError != null ? Text(_retrieveDataError) : null;
+//     if (retrieveError != null) {
+//       return retrieveError;
+//     }
+//     if (image != null) {
+//       return ClipRRect(
+//         borderRadius: BorderRadius.circular(20),
+//         child: Image.file(
+//           image,
+//           fit: BoxFit.fitHeight,
+//         ),
+//       );
+//     } else if (pickImageError != null) {
+//       return Text(
+//         'Pick image error: $pickImageError',
+//         textAlign: TextAlign.center,
+//       );
+//     } else {
+//       return const Text(
+//         'You have not yet picked an image.',
+//         textAlign: TextAlign.center,
+//       );
+//     }
+//     // Container(
+//     //   // width: MediaQuery.of(context).size.width * 0.24,
+//     //   // height: MediaQuery.of(context).size.width * 0.24,
+//     //   height: 100,
+//     //   width: 100,
+//     //   margin: EdgeInsets.only(bottom: 12),
+//     //   decoration: BoxDecoration(
+//     //     color: Theme.of(context).backgroundColor.withOpacity(0.5),
+//     //     borderRadius: BorderRadius.circular(20.0),
+//     //   ),
+//     //   child: image != null
+//     //       ? ClipRRect(
+//     //           borderRadius: BorderRadius.circular(20),
+//     //           child: Image.file(
+//     //             image,
+//     //             fit: BoxFit.fitHeight,
+//     //           ),
+//     //         )
+//     //       : CupertinoButton(
+//     //           alignment: Alignment.center,
+//     //           onPressed: () {
+//     //             _showPicker(context, image);
+//     //           },
+//     //           child: Column(
+//     //             children: [
+//     //               Expanded(
+//     //                 child: Image.asset(
+//     //                   'assets/images/cloud.png',
+//     //                   height: 20,
+//     //                   color: Colors.grey,
+//     //                 ),
+//     //               ),
+//     //               Row(
+//     //                 mainAxisAlignment: MainAxisAlignment.center,
+//     //                 children: [
+//     //                   SvgPicture.asset(
+//     //                     'assets/icons/add.svg',
+//     //                     height: 15,
+//     //                   ),
+//     //                   SizedBox(width: 10),
+//     //                   Text('Add product pictures'),
+//     //                 ],
+//     //               ),
+//     //             ],
+//     //           ),
+//     //         ),
+//     // );
+//   }
+
+//   // get image by camera
+//   _imgFromCamera(File img) async {
+//     try {
+//       final pickedImage = await picker.getImage(
+//         source: ImageSource.camera,
+//         imageQuality: 100,
+//       );
+//       setState(() {
+//         if (pickedImage != null) {
+//           img = File(pickedImage.path);
+//           // images.add(img);
+//         } else {
+//           print('No image selected.');
+//         }
+//       });
+//     } catch (e) {
+//       pickImageError = e;
+//     }
+//   }
+
+//   // get image by gallery
+//   _imgFromGallery(File img) async {
+//     try {
+//       final pickedImage = await picker.getImage(
+//         source: ImageSource.gallery,
+//         imageQuality: 100,
+//       );
+//       setState(() {
+//         if (pickedImage != null) {
+//           img = File(pickedImage.path);
+//           // images.add(img);
+//         } else {
+//           print('No image selected.');
+//         }
+//       });
+//     } catch (e) {
+//       pickImageError = e;
+//     }
+//   }
+
+//   void _showPicker(context, File image) {
+//     showModalBottomSheet(
+//       context: context,
+//       builder: (BuildContext bc) {
+//         return SafeArea(
+//           child: Container(
+//             child: Wrap(
+//               children: <Widget>[
+//                 ListTile(
+//                   leading: new Icon(Icons.photo_library),
+//                   title: new Text('Photo Library'),
+//                   onTap: () {
+//                     _imgFromGallery(image);
+//                     Navigator.of(context).pop();
+//                   },
+//                 ),
+//                 ListTile(
+//                   leading: new Icon(Icons.photo_camera),
+//                   title: new Text('Camera'),
+//                   onTap: () {
+//                     _imgFromCamera(image);
+//                     Navigator.of(context).pop();
+//                   },
+//                 ),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+
+//   Future<void> retrieveLostData(File image) async {
+//     final LostData response = await picker.getLostData();
+//     if (response.isEmpty) {
+//       return;
+//     }
+//     if (response.file != null) {
+//       setState(() {
+//         image = File(response.file.path);
+//       });
+//     } else {
+//       _retrieveDataError = response.exception.code;
+//     }
+//   }

@@ -1,3 +1,4 @@
 Add bottomsheet to show edit/delete options
 check auth-based pages with consumer
 remove focus textfields
+deactivate textcontollers (dispose)

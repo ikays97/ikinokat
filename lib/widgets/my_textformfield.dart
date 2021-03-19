@@ -25,9 +25,12 @@ class MyTextFormField extends StatelessWidget {
     this.obscureText = false,
   }) : super(key: key);
 
-  checkPlatform(BuildContext context) {
-    if (Platform.isIOS) {
-      return CupertinoTextField(
+  platformIOS(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 7.0,
+      ),
+      child: CupertinoTextField(
         controller: controller,
         obscureText: obscureText,
         maxLines: maxLines,
@@ -45,9 +48,16 @@ class MyTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(9.0),
           border: Border.all(color: Theme.of(context).accentColor),
         ),
-      );
-    } else if (Platform.isAndroid) {
-      return FormField<String>(
+      ),
+    );
+  }
+
+  platformAndroid(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 6.0,
+      ),
+      child: FormField<String>(
         builder: (FormFieldState<String> state) {
           return TextFormField(
             controller: controller,
@@ -97,17 +107,18 @@ class MyTextFormField extends StatelessWidget {
             ),
           );
         },
-      );
-    }
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        bottom: 12,
-      ),
-      child: checkPlatform(context),
-    );
+    if (Platform.isIOS) {
+      return platformIOS(context);
+    } else if (Platform.isAndroid) {
+      return platformAndroid(context);
+    } else {
+      return Container();
+    }
   }
 }

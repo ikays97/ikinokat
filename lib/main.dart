@@ -6,6 +6,7 @@ import 'package:get/state_manager.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
 import 'package:ikinokat/pages/my_products.dart/provider/addproduct_provider.dart';
+import 'package:ikinokat/pages/my_products.dart/provider/image_provider.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
 import 'package:ikinokat/translations/binding.dart';
@@ -50,6 +51,9 @@ void main() async {
             ),
             ChangeNotifierProvider(
               create: (_) => CategoryProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => MyImageProvider(),
             ),
           ],
           child: IKINOKATAPP(lang: selectedLang),

@@ -19,7 +19,9 @@ class MyDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(
+        vertical: 7.0,
+      ),
       child: FormField<String>(
         builder: (FormFieldState<String> state) {
           return InputDecorator(
