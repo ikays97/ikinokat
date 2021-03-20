@@ -7,6 +7,7 @@ import 'package:ikinokat/widgets/my_custom_footer.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:get/get.dart';
 
 class MyProductsPage extends StatelessWidget {
   const MyProductsPage({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class MyProductsPage extends StatelessWidget {
         appBar: MyAppBar(
           context: context,
           leadingType: AppBarBackType.Back,
-          title: Text('My Products'),
+          title: Text('my_products'.tr),
         ),
         body: SafeArea(
           child: MyProductsPageContainer(),
@@ -34,29 +35,28 @@ class MyProductsPageContainer extends StatelessWidget {
     final state = Provider.of<GetProductsProvider>(context);
     return state.loading
         ? MyLoadingWidget()
-        : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Container(
-              child: GestureDetector(
-                onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-                child: SmartRefresher(
-                  controller: state.refreshController,
-                  enablePullUp: true,
-                  onRefresh: state.getUserProducts,
-                  onLoading: state.loadMoreProducts,
-                  footer: MyCustomFooter(),
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverToBoxAdapter(
+        : Container(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+              child: SmartRefresher(
+                controller: state.refreshController,
+                onRefresh: state.getUserProducts,
+                footer: MyCustomFooter(),
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverPadding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                      sliver: SliverToBoxAdapter(
                         child: GridProducts(
                           auth: true,
                           products: state.userProducts,
                         ),
                       ),
+                    ),
 
-                      /// all products by scrolling up
-                    ],
-                  ),
+                    /// all products by scrolling up
+                  ],
                 ),
               ),
             ),

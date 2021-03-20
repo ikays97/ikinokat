@@ -43,7 +43,7 @@ final Map<String, String> en = {
   "add_cancel": "cancel",
 
   // search
-  "search_bar_label": "Search",
+  "search_hint": "Search",
 
   // categories
   "categories": "Categories",

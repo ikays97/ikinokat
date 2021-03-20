@@ -5,7 +5,7 @@ import 'component/results.dart';
 class SearchPage extends SearchDelegate {
   SearchPage()
       : super(
-          searchFieldLabel: 'search_bar_label'.tr,
+          searchFieldLabel: 'search_hint'.tr,
           keyboardType: TextInputType.text,
           textInputAction: TextInputAction.search,
         );

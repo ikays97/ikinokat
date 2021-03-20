@@ -46,17 +46,24 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
   FocusNode keywordFocus;
   FocusNode descFocus;
   //
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-  final TextEditingController _quantityController = TextEditingController();
-  final TextEditingController _keywordController = TextEditingController();
-  final TextEditingController _descripController = TextEditingController();
+  TextEditingController _nameController;
+  TextEditingController _priceController;
+  TextEditingController _quantityController;
+  TextEditingController _keywordController;
+  TextEditingController _descripController;
   String _category, _brand, _unit;
   List<File> _images = [];
 
   @override
   void initState() {
     super.initState();
+    // controllers
+    _nameController = TextEditingController();
+    _priceController = TextEditingController();
+    _quantityController = TextEditingController();
+    _keywordController = TextEditingController();
+    _descripController = TextEditingController();
+    // focus nodes
     nameFocus = FocusNode();
     priceFocus = FocusNode();
     quantityFocus = FocusNode();
@@ -66,6 +73,13 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
 
   @override
   void dispose() {
+    // controllers
+    _nameController.dispose();
+    _priceController.dispose();
+    _quantityController.dispose();
+    _keywordController.dispose();
+    _descripController.dispose();
+    // focus nodes
     nameFocus.dispose();
     priceFocus.dispose();
     quantityFocus.dispose();
@@ -77,6 +91,7 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
   @override
   Widget build(BuildContext context) {
     /// states
+    final state = Provider.of<AddProductProvider>(context);
     final cat_state = Provider.of<CategoryProvider>(context);
     final brand_state = Provider.of<GetBrandsProvider>(context);
     final imagestate = Provider.of<MyImageProvider>(context);
@@ -144,7 +159,7 @@ class _ProductAddPageContainerState extends State<ProductAddPageContainer> {
         context: context,
         leadingType: AppBarBackType.None,
       ),
-      body: cat_state.loading
+      body: state.loading
           ? MyLoadingWidget()
           : GestureDetector(
               onTap: () {

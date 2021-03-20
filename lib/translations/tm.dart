@@ -42,7 +42,7 @@ final Map<String, String> tm = {
   "add_cancel": "Bes et",
 
   // search
-  "search_bar_label": "Gözleg",
+  "search_hint": "Gözleg",
 
   // categories
   "categories": "Ähli bölümler",
