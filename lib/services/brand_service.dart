@@ -9,7 +9,6 @@ class BrandAPI {
     Options options,
   }) async {
     var response = await RequestUtil().get(route, params: params);
-    print(response);
     return BrandListModel.fromJson(response['data']);
   }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'component/results.dart';
-import 'component/suggestions.dart';
 
 class SearchPage extends SearchDelegate {
   SearchPage()
@@ -16,16 +14,6 @@ class SearchPage extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     assert(context != null);
     final ThemeData theme = Theme.of(context);
-    // ThemeData(
-    //   primaryColor: Theme.of(context).canvasColor,
-    //   inputDecorationTheme: InputDecorationTheme(
-    //     hintStyle: Theme.of(context).textTheme.headline6.copyWith(
-    //           fontSize: 16,
-    //           color: Theme.of(context).accentColor.withOpacity(0.5),
-    //         ),
-    //   ),
-    //   textTheme:
-    // );
     assert(theme != null);
     return theme;
   }

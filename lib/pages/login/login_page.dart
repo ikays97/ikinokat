@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/config/validators.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
-import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_custom_button.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:ikinokat/widgets/my_textformfield.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -67,12 +67,12 @@ class _LoginPageContainerState extends State<LoginPageContainer> {
             MyTextFormField(
               controller: _usernameController,
               validator: validateName,
-              hintText: 'Username',
+              hintText: 'login_email'.tr,
             ),
             MyTextFormField(
               controller: _passwordController,
               validator: validatePassword,
-              hintText: 'Password',
+              hintText: 'login_password'.tr,
             ),
             Consumer<UserProvider>(
               builder: (_, state, child) {
@@ -80,7 +80,7 @@ class _LoginPageContainerState extends State<LoginPageContainer> {
                     ? MyLoadingWidget()
                     : MyCustomButton(
                         onTap: doLogin,
-                        text: 'Login',
+                        text: 'login'.tr,
                       );
               },
             ),

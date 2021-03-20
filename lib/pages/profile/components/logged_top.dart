@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/pages/profile/provider/user_provider.dart';
-import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/custom_dialog.dart';
 import 'package:ikinokat/widgets/my_cached_image.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class LoggedProfileTop extends StatelessWidget {
   final BuildContext current_context;
@@ -75,11 +74,12 @@ class LoggedProfileTop extends StatelessWidget {
                         context: current_context,
                         builder: (_) {
                           return CustomDialog(
-                            title: 'Logout?',
+                            title: 'logout'.tr,
                             content: Text(
-                                'Do you want to log out? Message: Reference to an enclosing class method cannot be extracted.'),
-                            confirmContent: 'Yes',
-                            cancelContent: 'No',
+                              'logout_content'.tr,
+                            ),
+                            confirmContent: 'yes'.tr,
+                            cancelContent: 'no'.tr,
                             outsideDismiss: true,
                             confirmCallback: () async {
                               UserProvider state = Provider.of<UserProvider>(
@@ -95,7 +95,7 @@ class LoggedProfileTop extends StatelessWidget {
                         });
                   },
                   child: Text(
-                    'Logout',
+                    'logout'.tr,
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontSize: 18,
                           color: Colors.red[300],

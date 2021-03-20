@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinokat/pages/home/components/grid_products.dart';
-import 'package:ikinokat/pages/my_products.dart/provider/getproducts_provider.dart';
+import 'package:ikinokat/pages/view_my_products/provider/getproducts_provider.dart';
 import 'package:ikinokat/widgets/my_appbar.dart';
 import 'package:ikinokat/widgets/my_custom_footer.dart';
 import 'package:ikinokat/widgets/my_loading.dart';

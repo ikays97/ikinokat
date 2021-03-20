@@ -1,6 +1,6 @@
 final Map<String, String> tm = {
   'language': 'Dil',
-  'dark': 'Garaňky tema',
+  'dark': 'Gara tema',
   'markets': 'Bazarlar',
   'product': 'Haryt',
   'marka_yok': "Marka ýok",
@@ -8,7 +8,23 @@ final Map<String, String> tm = {
   'select_language': 'Dil Saýla',
   'no_info': 'Maglumat ýok',
   'empty': 'boş',
-  'negotiable': 'ylalaşykly',
+  'negotiable': 'Ylalaşykly',
+  'logout_content':
+      'Şahsy maglumatlaryňyzy yzarlamak üçin hasabyňyzdan çykmajak boluň. Çykjagyňyzy anyk bilýärsiňizmi?',
+  'yes': 'Hawa',
+  'no': 'Ýok',
+  'personal': 'Şahsy',
+  'gallery': 'Galereýa',
+  'camera': 'Kamera',
+  'upload': 'Ýükle',
+  'select_category': 'Kategoriýa saýla',
+  'select_brand': 'Marka saýla',
+  'select_unit': 'Ölçeg birligi',
+  'your_name': 'Adyňyz',
+  'product_price': 'Harydyň bahasy',
+  'minimum_quantity': 'Iň az mukdar',
+  'product_keywords': 'Harydyň açar sözleri',
+  'product_desc': 'Haryt barada maglumat',
 
   // add page
   "add_new_product": "Täze haryt",

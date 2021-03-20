@@ -56,7 +56,7 @@ class GridProducts extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       // products[i].getName(code),
-                      "Gaty kan setir product ady barlap goreli hany hakyky ady ${products[i].getName(code)}",
+                      "${products[i].getName(code)}",
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText2.copyWith(

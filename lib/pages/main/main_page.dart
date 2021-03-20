@@ -4,7 +4,7 @@ import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 import 'package:ikinokat/pages/category/category_page.dart';
 import 'package:ikinokat/pages/home/home_page.dart';
 import 'package:ikinokat/pages/main/provider/main_provider.dart';
-import 'package:ikinokat/pages/my_products.dart/pages/product_add_page.dart';
+import 'package:ikinokat/pages/add_product/product_add_page.dart';
 import 'package:ikinokat/pages/profile/profile_page.dart';
 import 'package:ikinokat/utils/navigator.dart';
 import 'package:ikinokat/widgets/my_bottom_navbar.dart';

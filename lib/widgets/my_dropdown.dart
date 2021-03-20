@@ -33,7 +33,7 @@ class MyDropDown extends StatelessWidget {
                     .textTheme
                     .bodyText1
                     .color
-                    .withOpacity(0.7),
+                    .withOpacity(0.4),
               ),
               hintStyle: TextStyle(
                 fontSize: 13,

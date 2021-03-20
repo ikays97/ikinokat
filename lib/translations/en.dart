@@ -1,6 +1,7 @@
 final Map<String, String> en = {
+  // latest
   'language': 'Language',
-  'dark': 'Dark Mode',
+  'dark': 'Dark mode',
   'markets': 'Markets',
   'product': 'Product',
   'marka_yok': "Supplier doesn't have any brand",
@@ -9,6 +10,22 @@ final Map<String, String> en = {
   'no_info': 'no info',
   'empty': 'empty',
   'negotiable': 'negotiable',
+  'logout_content':
+      'To track your personal data, try to keep signed in. Are you sure to log out?',
+  'yes': 'Yes',
+  'no': 'No',
+  'personal': 'Personal',
+  'gallery': 'Gallery',
+  'camera': 'Camera',
+  'upload': 'Add',
+  'select_category': 'Select Category',
+  'select_brand': 'Select Brand',
+  'select_unit': 'Select Unit',
+  'your_name': 'Your name',
+  'product_price': 'Product price',
+  'minimum_quantity': 'Minimum quantity',
+  'product_keywords': 'Product keywords',
+  'product_desc': 'Description of product',
 
   // add page
   "add_new_product": "New Product",
@@ -60,9 +77,9 @@ final Map<String, String> en = {
   "productd_order_cancel": "cancel",
 
   // supplier page
-  "my_products": "my products",
-  "my_brands": "my brands",
-  "my_request_me": "request me",
+  "my_products": "My Products",
+  "my_brands": "My Brands",
+  "my_request_me": "My Orders",
   "edit_profile": "edit profile",
   "provider_preview": "views",
   "provider_brands": "Brands",

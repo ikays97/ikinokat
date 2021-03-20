@@ -12,6 +12,7 @@ class MyTextFormField extends StatelessWidget {
   final int maxLines;
   final int minLines;
   final bool obscureText;
+  final FocusNode focusNode;
 
   const MyTextFormField({
     Key key,
@@ -23,6 +24,7 @@ class MyTextFormField extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.obscureText = false,
+    this.focusNode,
   }) : super(key: key);
 
   platformIOS(BuildContext context) {
@@ -60,6 +62,7 @@ class MyTextFormField extends StatelessWidget {
       child: FormField<String>(
         builder: (FormFieldState<String> state) {
           return TextFormField(
+            onTap: () => focusNode.requestFocus(),
             controller: controller,
             obscureText: obscureText,
             maxLines: maxLines,
@@ -76,7 +79,7 @@ class MyTextFormField extends StatelessWidget {
                     .textTheme
                     .bodyText1
                     .color
-                    .withOpacity(0.7),
+                    .withOpacity(0.4),
                 fontSize: 14,
               ),
               hintStyle: TextStyle(
@@ -105,6 +108,7 @@ class MyTextFormField extends StatelessWidget {
             strutStyle: StrutStyle(
               fontSize: 25,
             ),
+            focusNode: focusNode,
           );
         },
       ),

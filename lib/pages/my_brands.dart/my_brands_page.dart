@@ -7,6 +7,7 @@ import 'package:ikinokat/widgets/my_custom_footer.dart';
 import 'package:ikinokat/widgets/my_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:get/get.dart';
 
 class MyBrandsPage extends StatelessWidget {
   const MyBrandsPage({Key key}) : super(key: key);
@@ -16,7 +17,7 @@ class MyBrandsPage extends StatelessWidget {
       appBar: MyAppBar(
         context: context,
         leadingType: AppBarBackType.Back,
-        title: Text('My Brands'),
+        title: Text('my_brands'.tr),
       ),
       body: SafeArea(
         child: MyBrandsPageContainer(),

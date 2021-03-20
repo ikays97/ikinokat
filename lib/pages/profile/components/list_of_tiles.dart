@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ikinokat/config/custom_theme.dart';
 import 'package:ikinokat/pages/my_brands.dart/my_brands_page.dart';
 import 'package:ikinokat/pages/my_orders.dart/my_orders_page.dart';
-import 'package:ikinokat/pages/my_products.dart/pages/products_page.dart';
+import 'package:ikinokat/pages/view_my_products/products_page.dart';
 import 'package:ikinokat/pages/profile/components/select_language.dart';
 import 'package:ikinokat/pages/profile/provider/theme_provider.dart';
 import 'package:ikinokat/utils/navigator.dart';
@@ -30,7 +30,9 @@ class ProfileTileList extends StatelessWidget {
           // personal
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
-            child: LeftTitle(title: 'Personal'),
+            child: LeftTitle(
+              title: 'personal'.tr,
+            ),
           ),
           MyDivider(),
           Container(
@@ -41,7 +43,7 @@ class ProfileTileList extends StatelessWidget {
               children: [
                 ListTileItem(
                   iconData: 'assets/icons/product.svg',
-                  title: 'My Products',
+                  title: 'my_products'.tr,
                   count: 37,
                   onTap: () {
                     MyNavigator.push(MyProductsPage());
@@ -49,7 +51,7 @@ class ProfileTileList extends StatelessWidget {
                 ),
                 ListTileItem(
                   iconData: 'assets/icons/star.svg',
-                  title: 'My Brands',
+                  title: 'my_brands'.tr,
                   count: 5,
                   onTap: () {
                     MyNavigator.push(MyBrandsPage());
@@ -57,7 +59,7 @@ class ProfileTileList extends StatelessWidget {
                 ),
                 ListTileItem(
                   iconData: 'assets/icons/orders.svg',
-                  title: 'My Orders',
+                  title: 'my_request_me'.tr,
                   count: 15,
                   onTap: () {
                     MyNavigator.push(MyOrdersPage());
@@ -70,7 +72,9 @@ class ProfileTileList extends StatelessWidget {
           // settings
           Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
-            child: LeftTitle(title: 'Settings'),
+            child: LeftTitle(
+              title: 'settings'.tr,
+            ),
           ),
           MyDivider(),
           Container(
@@ -81,7 +85,7 @@ class ProfileTileList extends StatelessWidget {
               children: <Widget>[
                     ListTileItem(
                       iconData: 'assets/icons/language.svg',
-                      title: 'Language',
+                      title: 'language'.tr,
                       count: 3,
                       onTap: () {
                         MyNavigator.push(LanguageSelectPage());

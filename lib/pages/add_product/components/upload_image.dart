@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ikinokat/pages/my_products.dart/provider/image_provider.dart';
+import 'package:ikinokat/pages/add_product/provider/image_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class UploadSection extends StatefulWidget {
   final int number;
@@ -47,7 +48,7 @@ class _UploadSectionState extends State<UploadSection> {
                     default:
                       if (snapshot.hasError) {
                         return Text(
-                          'Pick image/video error: ${snapshot.error}}',
+                          'Pick image error: ${snapshot.error}}',
                           textAlign: TextAlign.center,
                         );
                       } else {
@@ -145,7 +146,9 @@ class _UploadSectionState extends State<UploadSection> {
               children: <Widget>[
                 ListTile(
                   leading: new Icon(Icons.photo_library),
-                  title: new Text('Photo Library'),
+                  title: new Text(
+                    'gallery'.tr,
+                  ),
                   onTap: () {
                     _onImageButtonPressed(ImageSource.gallery);
                     Navigator.of(context).pop();
@@ -153,7 +156,9 @@ class _UploadSectionState extends State<UploadSection> {
                 ),
                 ListTile(
                   leading: new Icon(Icons.photo_camera),
-                  title: new Text('Camera'),
+                  title: new Text(
+                    'camera'.tr,
+                  ),
                   onTap: () {
                     _onImageButtonPressed(ImageSource.camera);
                     Navigator.of(context).pop();
@@ -186,11 +191,11 @@ class _UploadSectionState extends State<UploadSection> {
               child: Image.asset(
                 'assets/images/cloud.png',
                 height: 20,
-                color: Colors.black45,
+                color: Colors.grey,
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SvgPicture.asset(
                   'assets/icons/add.svg',
@@ -198,10 +203,10 @@ class _UploadSectionState extends State<UploadSection> {
                   color: Colors.black38,
                 ),
                 Text(
-                  'Add',
+                  'upload'.tr,
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black26,
+                    fontSize: 12,
+                    color: Colors.grey,
                   ),
                 ),
               ],
